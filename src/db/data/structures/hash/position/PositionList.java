@@ -1,5 +1,9 @@
 package db.data.structures.hash.position;
 
+import db.interfaces.hash.IList;
+import db.data.structures.hash.Node;
+import db.interfaces.hash.position.Position;
+
 import java.util.Iterator;
 
 
@@ -23,6 +27,15 @@ public class PositionList<T> implements IList<T>
 		header = new Node<T>(trailer, null, null);
 		trailer.setPrev(header);
 		size = 0;
+	}
+
+	public PositionList(T entry)
+	{
+		trailer = new Node<T>(null, null, null);
+		header = new Node<T>(trailer, null, null);
+		trailer.setPrev(header);
+		size = 0;
+		addFirst(entry);
 	}
 	
 	/**

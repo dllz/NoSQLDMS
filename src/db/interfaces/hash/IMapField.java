@@ -1,4 +1,4 @@
-package db.data.structures.hash;
+package db.interfaces.hash;
 
 import java.util.Iterator;
 

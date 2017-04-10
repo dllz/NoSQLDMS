@@ -1,7 +1,8 @@
 package db.data.structures.hash.position;
 
 import java.util.Iterator;
-import db.data.structures.hash.IList;
+import db.interfaces.hash.IList;
+import db.interfaces.hash.position.Position;
 
 /**
  * An iterator over a db.data.structures.hash.position.position List. This will return the Item that is
@@ -52,6 +53,11 @@ public class PositionListIterator<T> implements Iterator<T> {
 	public void remove() {
 		list.remove(list.prev(cursor));
 		valid = false;
+	}
+
+	public Position<T> getCursor()
+	{
+		return cursor;
 	}
 
 }

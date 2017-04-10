@@ -1,4 +1,4 @@
-package db.data.structures.hash;
+package db.models.hash;
 
 public class HashEntry<K,V> {
 	private K key;

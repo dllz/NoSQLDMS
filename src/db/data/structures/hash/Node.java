@@ -1,4 +1,5 @@
-import db.data.structures.hash.position.Position;
+package db.data.structures.hash;
+import db.interfaces.hash.position.Position;
 
 /**
  * A node in the db.data.structures.hash.position.position List (this is just a doubly-linked node)
