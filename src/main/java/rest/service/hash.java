@@ -31,4 +31,5 @@ public class hash
         return "<html> " + "<title>" + "Hello Jersey" + "</title>"
                 + "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
     }
+
 }

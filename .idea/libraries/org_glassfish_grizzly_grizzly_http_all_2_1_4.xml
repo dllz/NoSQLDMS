@@ -1,7 +1,8 @@
 <component name="libraryTable">
-  <library name="org.glassfish.grizzly:grizzly-http-server-core:2.1.4" type="repository">
-    <properties maven-id="org.glassfish.grizzly:grizzly-http-server-core:2.1.4" />
+  <library name="org.glassfish.grizzly:grizzly-http-all:2.1.4" type="repository">
+    <properties maven-id="org.glassfish.grizzly:grizzly-http-all:2.1.4" />
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/grizzly-http-all-2.1.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/grizzly-http-server-core-2.1.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/grizzly-core-2.1.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/grizzly-framework-2.1.4.jar!/" />
@@ -13,9 +14,12 @@
       <root url="jar://$PROJECT_DIR$/lib/grizzly-http-2.1.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/grizzly-http-ajp-2.1.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/grizzly-http-server-multipart-2.1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/grizzly-http-servlet-2.1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/grizzly-comet-2.1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/grizzly-websockets-2.1.4.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/lib/grizzly-http-server-core-2.1.4-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/grizzly-http-all-2.1.4-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

@@ -19,11 +19,10 @@ public class HashTable<K> implements IMap<K>
 	 */
 	public HashTable() {
 		map	= new PositionList<HashEntry<K,PositionList<HashField>>>();
-		reverse = new PositionList<>();
+		reverse = new PositionList<EntryStorage<K>>();
 	}
 
 
-	@Override
 	/**
 	 * Remove an item from the hash table
 	 */
@@ -53,7 +52,6 @@ public class HashTable<K> implements IMap<K>
 		return null;
 	}
 
-	@Override
 	/**
 	 * Get the value for a given key
 	 * @param key the key for the item
@@ -83,7 +81,6 @@ public class HashTable<K> implements IMap<K>
 		return null;
 	}
 
-	@Override
 	public synchronized PositionList<HashField> getAll(K key)
 	{
 		Iterator<HashEntry<K,PositionList<HashField>>> keyIterator = map.iterator();
@@ -99,7 +96,6 @@ public class HashTable<K> implements IMap<K>
 		return null;
 	}
 
-	@Override
 	/**
 	 * Put an item into the hash table
 	 * @param key the key for the item (unique)
@@ -108,7 +104,7 @@ public class HashTable<K> implements IMap<K>
 	public synchronized void put(K key, HashField value) {
 		if(getAll(key) == null)
 		{
-			PositionList<HashField> temp = new PositionList<>(value);
+			PositionList<HashField> temp = new PositionList<HashField>(value);
 			map.addLast(new HashEntry(key, temp));
 		}
 		else
@@ -144,7 +140,7 @@ public class HashTable<K> implements IMap<K>
 
 	public synchronized Position<EntryStorage<K>> searchPos(K key, String field)
 	{
-		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<>(reverse);
+		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<EntryStorage<K>>(reverse);
 		EntryStorage<K> entry;
 		while (reverseI.hasNext())
 		{
@@ -160,8 +156,8 @@ public class HashTable<K> implements IMap<K>
 
 	public synchronized PositionList<K> search (String field, Object value)
 	{
-		PositionList<K> foundList = new PositionList<>();
-		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<>(reverse);
+		PositionList<K> foundList = new PositionList<K>();
+		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<EntryStorage<K>>(reverse);
 		EntryStorage<K> entry;
 		while (reverseI.hasNext())
 		{
@@ -176,8 +172,8 @@ public class HashTable<K> implements IMap<K>
 
 	public synchronized PositionList<K> search (Object value)
 	{
-		PositionList<K> foundList = new PositionList<>();
-		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<>(reverse);
+		PositionList<K> foundList = new PositionList<K>();
+		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<EntryStorage<K>>(reverse);
 		EntryStorage<K> entry;
 		while (reverseI.hasNext())
 		{

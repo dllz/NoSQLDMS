@@ -1,0 +1,30 @@
+<component name="libraryTable">
+  <library name="org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.26-b03" type="repository">
+    <properties maven-id="org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.26-b03" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jersey-container-grizzly2-http-2.26-b03.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.inject-2.5.0-b36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/grizzly-http-server-2.3.28.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/grizzly-http-2.3.28.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/grizzly-framework-2.3.28.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-common-2.26-b03.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.ws.rs-api-2.1-m05.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.annotation-api-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-guava-2.26-b03.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hk2-api-2.5.0-b36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hk2-utils-2.5.0-b36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/aopalliance-repackaged-2.5.0-b36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hk2-locator-2.5.0-b36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javassist-3.20.0-GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/osgi-resource-locator-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-server-2.26-b03.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-client-2.26-b03.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-media-jaxb-2.26-b03.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/validation-api-1.1.0.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/jersey-container-grizzly2-http-2.26-b03-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
