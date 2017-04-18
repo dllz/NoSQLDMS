@@ -27,7 +27,7 @@ public class HashTable<K> implements IMap<K>
 	/**
 	 * Remove an item from the hash table
 	 */
-	public HashField remove(K key, String field) {
+	public synchronized HashField remove(K key, String field) {
 		Iterator<HashEntry<K,PositionList<HashField>>> keyIterator = map.iterator();
 		HashEntry<K,PositionList<HashField>> item;
 		while (keyIterator.hasNext()) {
@@ -59,7 +59,7 @@ public class HashTable<K> implements IMap<K>
 	 * @param key the key for the item
 	 * @returns the value for the associated key
 	 */
-	public HashField get(K key, String field) {
+	public synchronized HashField get(K key, String field) {
 		Iterator<HashEntry<K,PositionList<HashField>>> keyIterator = map.iterator();
 		HashEntry<K,PositionList<HashField>> item;
 		while (keyIterator.hasNext()) {
@@ -84,7 +84,7 @@ public class HashTable<K> implements IMap<K>
 	}
 
 	@Override
-	public PositionList<HashField> getAll(K key)
+	public synchronized PositionList<HashField> getAll(K key)
 	{
 		Iterator<HashEntry<K,PositionList<HashField>>> keyIterator = map.iterator();
 		HashEntry<K,PositionList<HashField>> item;
@@ -105,7 +105,7 @@ public class HashTable<K> implements IMap<K>
 	 * @param key the key for the item (unique)
 	 * @param value the value for the item
 	 */
-	public void put(K key, HashField value) {
+	public synchronized void put(K key, HashField value) {
 		if(getAll(key) == null)
 		{
 			PositionList<HashField> temp = new PositionList<>(value);
@@ -142,7 +142,7 @@ public class HashTable<K> implements IMap<K>
 	}
 
 
-	public Position<EntryStorage<K>> searchPos(K key, String field)
+	public synchronized Position<EntryStorage<K>> searchPos(K key, String field)
 	{
 		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<>(reverse);
 		EntryStorage<K> entry;
@@ -158,7 +158,7 @@ public class HashTable<K> implements IMap<K>
 		return null;
 	}
 
-	public PositionList<K> search (String field, Object value)
+	public synchronized PositionList<K> search (String field, Object value)
 	{
 		PositionList<K> foundList = new PositionList<>();
 		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<>(reverse);
@@ -174,7 +174,7 @@ public class HashTable<K> implements IMap<K>
 		return foundList;
 	}
 
-	public PositionList<K> search (Object value)
+	public synchronized PositionList<K> search (Object value)
 	{
 		PositionList<K> foundList = new PositionList<>();
 		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<>(reverse);
