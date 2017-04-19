@@ -29,6 +29,5 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.glassfish.jersey.core:jersey-server:2.21.1" level="project" />
     <orderEntry type="library" name="org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.26-b03" level="project" />
-    <orderEntry type="library" name="org.glassfish.grizzly:grizzly-http-all:2.1.4" level="project" />
   </component>
 </module>

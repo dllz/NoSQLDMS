@@ -138,7 +138,7 @@ public class HashTable<K> implements IMap<K>
 	}
 
 
-	public synchronized Position<EntryStorage<K>> searchPos(K key, String field)
+	private synchronized Position<EntryStorage<K>> searchPos(K key, String field)
 	{
 		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<EntryStorage<K>>(reverse);
 		EntryStorage<K> entry;
