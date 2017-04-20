@@ -3,10 +3,7 @@ package rest.service;
 import db.data.structures.hash.position.PositionList;
 import db.models.hash.HashField;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import java.util.Iterator;
@@ -20,8 +17,9 @@ import static rest.service.Main.ht;
 public class hash
 {
     @GET
+    @Path("searchv/{field}/{value}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String[] searchfv(String field, Object value) {
+    public String[] searchfv(@PathParam("field") String field, @PathParam("value") String value) {
         PositionList<String> list = ht.search(field, value);
         String[] arry = new String[list.size()];
         Iterator<String> listit = list.iterator();
@@ -36,8 +34,9 @@ public class hash
     }
 
     @GET
+    @Path("searchv/{value}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String[] searchv(Object value) {
+    public String[] searchv(@PathParam("value") String value) {
         PositionList<String> list = ht.search(value);
         String[] arry = new String[list.size()];
         Iterator<String> listit = list.iterator();
@@ -51,15 +50,17 @@ public class hash
     }
 
     @PUT
+    @Path("put/{key}/{field}/{value}")
     @Produces(MediaType.TEXT_PLAIN)
-    public String hashput(String key, HashField value) {
-        ht.put(key, value);
+    public String hashput(@PathParam("key") String key, @PathParam("field") String field, @PathParam("value") String value) {
+        ht.put(key, new HashField(field, value));
         return "Completed";
     }
 
-    @PUT
+    @GET
+    @Path("del/{key}/{field}")
     @Produces(MediaType.APPLICATION_JSON)
-    public HashField hashdel(String key, String field) {
+    public HashField hashdel(@PathParam("key") String key, @PathParam("field") String field) {
         return ht.remove(key, field);
     }
 
@@ -70,8 +71,9 @@ public class hash
     }
 
     @GET
+    @Path("getall/{key}")
     @Produces(MediaType.APPLICATION_JSON)
-    public HashField[] hashgetall(String key) {
+    public HashField[] hashgetall(@PathParam("key") String key) {
         PositionList<HashField> list = ht.getAll(key);
         HashField[] arry = new HashField[list.size()];
         Iterator<HashField> listit = list.iterator();
