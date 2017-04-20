@@ -1,7 +1,6 @@
 package rest.service;
 
 import db.data.structures.hash.HashTable;
-import db.models.hash.HashEntry;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;

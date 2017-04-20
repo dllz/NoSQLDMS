@@ -1,7 +1,6 @@
 package rest.service;
 
 import db.data.structures.hash.position.PositionList;
-import db.data.structures.hash.position.PositionListIterator;
 import db.models.hash.HashField;
 
 import javax.ws.rs.GET;
