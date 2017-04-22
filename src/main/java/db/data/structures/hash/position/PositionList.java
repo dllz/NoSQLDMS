@@ -4,6 +4,7 @@ import db.interfaces.hash.IList;
 import db.data.structures.hash.Node;
 import db.interfaces.hash.position.Position;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 
@@ -12,7 +13,7 @@ import java.util.Iterator;
  *
  * @param <T> the type of the objects in the list.
  */
-public class PositionList<T> implements IList<T>
+public class PositionList<T> implements IList<T>, Serializable
 {
 
 	private Node<T> header = null;
@@ -41,7 +42,6 @@ public class PositionList<T> implements IList<T>
 	/**
 	 * Add an element after a given node in the list
 	 */
-	@Override
 	public Position<T> addAfter(Position<T> p, T item) {
 		Node<T> elem = checkPosition(p);
 		
@@ -57,7 +57,6 @@ public class PositionList<T> implements IList<T>
 	/**
 	 * Add an element before a given node in a list
 	 */
-	@Override
 	public Position<T> addBefore(Position<T> p, T item) {
 		Node<T> elem = checkPosition(p);
 		
@@ -87,7 +86,6 @@ public class PositionList<T> implements IList<T>
 	/**
 	 * Remove a specified node from the list. The removed element is returned
 	 */
-	@Override
 	public T remove(Position<T> p) {
 		Node<T> elem = checkPosition(p);
 		
@@ -145,7 +143,6 @@ public class PositionList<T> implements IList<T>
 	/**
 	 * Returns the node that contains the element that is specified as a parameter
 	 */
-	@Override
 	public Position<T> search(T elem) {
 		Node<T> currentNode = header.getNext();
 		while (currentNode != trailer) {
@@ -160,7 +157,6 @@ public class PositionList<T> implements IList<T>
 	/**
 	 * Returns true if the list is empty
 	 */
-	@Override
 	public boolean isEmpty() {
 		return (header.getNext() == trailer);
 	}
@@ -168,7 +164,6 @@ public class PositionList<T> implements IList<T>
 	/**
 	 * Return the size of the list
 	 */
-	@Override
 	public Integer size() {
 		return size;
 	}
@@ -205,7 +200,6 @@ public class PositionList<T> implements IList<T>
 	/**
 	 * Return a new iterator over the elements in this list
 	 */
-	@Override
 	public Iterator<T> iterator() {
 		return new PositionListIterator<T>(this);
 	}

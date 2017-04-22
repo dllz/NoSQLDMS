@@ -1,8 +1,11 @@
 package db.models.hash;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by danie on 2017/04/10.
  */
+@XmlRootElement
 public class HashField<V> extends Object
 {
         private String field;
@@ -13,7 +16,11 @@ public class HashField<V> extends Object
             this.value = value;
         }
 
-        public String getField() {
+    public HashField()
+    {
+    }
+
+    public String getField() {
             return field;
         }
 

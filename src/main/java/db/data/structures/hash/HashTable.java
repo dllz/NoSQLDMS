@@ -8,9 +8,10 @@ import db.models.hash.EntryStorage;
 import db.models.hash.HashEntry;
 import db.models.hash.HashField;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
-public class HashTable<K> implements IMap<K>
+public class HashTable<K> implements IMap<K>, Serializable
 {
 	private PositionList<HashEntry<K,PositionList<HashField>>> map;
 	private PositionList<EntryStorage<K>> reverse;

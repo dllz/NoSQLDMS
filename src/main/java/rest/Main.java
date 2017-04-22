@@ -1,9 +1,11 @@
-package rest.service;
+package rest;
 
-import db.data.structures.hash.HashTable;
+import db.data.persistance.HtPersistance;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import rest.service.check;
+import rest.service.hash;
 
 import javax.ws.rs.core.UriBuilder;
 import java.io.IOException;
@@ -19,22 +21,18 @@ public class Main
             .fromUri("http://localhost/")
             .port(8000)
             .build();
-    public static HashTable<String> ht = new HashTable<String>();
     public static void main(String[] args) throws URISyntaxException, IOException
     {
+        hash.setHt(HtPersistance.readht());
         ResourceConfig rc = new ResourceConfig();
         rc.registerClasses(hash.class);
-        try
-        {
-            HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
-            server.start();
-        }
-        catch (NoSuchMethodError e)
-        {
-            System.err.println(e.toString());
-        }
-
-
+        rc.registerClasses(check.class);
+        final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
+        System.out.println(String.format("Jersey app started with WADL available at "
+                + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+        System.in.read();
+        hash.save();
+        server.stop();
     }
 
 }

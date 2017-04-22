@@ -1,12 +1,14 @@
 package db.data.structures.hash;
 import db.interfaces.hash.position.Position;
 
+import java.io.Serializable;
+
 /**
  * A node in the db.data.structures.hash.position.position List (this is just a doubly-linked node)
  *
  * @param <T> the object type for this node
  */
-public class Node<T> implements Position<T>
+public class Node<T> implements Position<T>, Serializable
 {
 	T element;
 	Node<T> next;
@@ -45,7 +47,6 @@ public class Node<T> implements Position<T>
 		return "<" + element.toString() + ">";
 	}
 
-	@Override
 	public T element() {
 		return element;
 	}
