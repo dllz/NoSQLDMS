@@ -1,4 +1,4 @@
-package db.models.hash;
+package main.db.models.hash;
 
 /**
  * Created by danie on 2017/04/10.

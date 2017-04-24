@@ -1,11 +1,11 @@
-package db.data.structures.hash.position;
+package main.db.data.structures.position;
 
 import java.util.Iterator;
-import db.interfaces.hash.IList;
-import db.interfaces.hash.position.Position;
+import main.db.interfaces.hash.IList;
+import main.db.interfaces.position.Position;
 
 /**
- * An iterator over a db.data.structures.hash.position.position List. This will return the Item that is
+ * An iterator over a main.db.data.structures.position.position List. This will return the Item that is
  * contained in the list
  *
  * @param <T> The object type that will be returned by the Iterator

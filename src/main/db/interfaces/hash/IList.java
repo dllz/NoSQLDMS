@@ -1,5 +1,5 @@
-package db.interfaces.hash;
-import db.interfaces.hash.position.Position;
+package main.db.interfaces.hash;
+import main.db.interfaces.position.Position;
 
 public interface IList<T> extends Iterable<T> {
 	public Position<T> addAfter(Position<T> p, T item);

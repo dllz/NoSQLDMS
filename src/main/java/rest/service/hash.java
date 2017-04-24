@@ -1,9 +1,9 @@
 package rest.service;
 
-import db.data.persistance.HtPersistance;
-import db.data.structures.hash.HashTable;
-import db.data.structures.hash.position.PositionList;
-import db.models.hash.HashField;
+import main.db.data.persistance.HtPersistance;
+import main.db.data.structures.hash.HashTable;
+import main.db.data.structures.position.PositionList;
+import main.db.models.hash.HashField;
 import rest.service.models.ApiResponse;
 import rest.service.models.ReponseCodes;
 

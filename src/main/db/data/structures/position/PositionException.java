@@ -1,4 +1,4 @@
-package db.data.structures.hash.position;
+package main.db.data.structures.position;
 
 /**
  * An exception that will be thrown if there is an error when casting the exception

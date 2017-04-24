@@ -1,6 +1,6 @@
-package db.data.persistance;
+package main.db.data.persistance;
 
-import db.data.structures.hash.HashTable;
+import main.db.data.structures.hash.HashTable;
 
 import java.io.*;
 

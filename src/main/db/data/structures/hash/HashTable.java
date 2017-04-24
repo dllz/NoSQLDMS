@@ -1,12 +1,12 @@
-package db.data.structures.hash;
+package main.db.data.structures.hash;
 
-import db.data.structures.hash.position.PositionList;
-import db.data.structures.hash.position.PositionListIterator;
-import db.interfaces.hash.IMap;
-import db.interfaces.hash.position.Position;
-import db.models.hash.EntryStorage;
-import db.models.hash.HashEntry;
-import db.models.hash.HashField;
+import main.db.data.structures.position.PositionList;
+import main.db.data.structures.position.PositionListIterator;
+import main.db.interfaces.hash.IMap;
+import main.db.interfaces.position.Position;
+import main.db.models.hash.EntryStorage;
+import main.db.models.hash.HashEntry;
+import main.db.models.hash.HashField;
 
 import java.io.Serializable;
 import java.util.Iterator;

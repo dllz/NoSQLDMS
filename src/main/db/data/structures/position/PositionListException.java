@@ -1,7 +1,7 @@
-package db.data.structures.hash.position;
+package main.db.data.structures.position;
 
 /**
- * An exception that will be thrown if there is an error with the db.data.structures.hash.position.position List
+ * An exception that will be thrown if there is an error with the main.db.data.structures.position.position List
  *
  */
 public class PositionListException extends RuntimeException {

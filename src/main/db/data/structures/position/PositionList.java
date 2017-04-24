@@ -1,15 +1,15 @@
-package db.data.structures.hash.position;
+package main.db.data.structures.position;
 
-import db.interfaces.hash.IList;
-import db.data.structures.hash.Node;
-import db.interfaces.hash.position.Position;
+import main.db.interfaces.hash.IList;
+import main.db.data.structures.hash.Node;
+import main.db.interfaces.position.Position;
 
 import java.io.Serializable;
 import java.util.Iterator;
 
 
 /**
- * The db.data.structures.hash.position.position List itself, this is just a doubly-linked list that make use of Positions
+ * The main.db.data.structures.position.position List itself, this is just a doubly-linked list that make use of Positions
  *
  * @param <T> the type of the objects in the list.
  */
@@ -100,7 +100,7 @@ public class PositionList<T> implements IList<T>, Serializable
 
 	/**
 	 * Return the front of the list
-	 * @return the first db.data.structures.hash.position.position<T> in the list
+	 * @return the first main.db.data.structures.position.position<T> in the list
 	 */
 	public Position<T> first() {
 		if (header.getNext() == trailer) {
@@ -111,7 +111,7 @@ public class PositionList<T> implements IList<T>, Serializable
 	
 	/**
 	 * Returns the last element in the list
-	 * @return the last db.data.structures.hash.position.position<T> element in the list
+	 * @return the last main.db.data.structures.position.position<T> element in the list
 	 */
 	public Position<T> last() {
 		if (trailer.getPrev() == header) {
@@ -122,8 +122,8 @@ public class PositionList<T> implements IList<T>, Serializable
 	
 	/**
 	 * Get the next element in the list
-	 * @param p an existing db.data.structures.hash.position.position in the list
-	 * @return the db.data.structures.hash.position.position<T> that corresponds to the next element
+	 * @param p an existing main.db.data.structures.position.position in the list
+	 * @return the main.db.data.structures.position.position<T> that corresponds to the next element
 	 */
 	public Position<T> next(Position<T> p) {
 		Node<T> node = checkPosition(p);
@@ -132,7 +132,7 @@ public class PositionList<T> implements IList<T>, Serializable
 	
 	/**
 	 * Get the previous element in the list
-	 * @param p an exisiting db.data.structures.hash.position.position in the list
+	 * @param p an exisiting main.db.data.structures.position.position in the list
 	 * @return the Posiiton<T> that corresponds to the prev elements
 	 */
 	public Position<T> prev(Position<T> p) {
@@ -182,13 +182,13 @@ public class PositionList<T> implements IList<T>, Serializable
 	}
 	
 	/**
-	 * Convert a db.data.structures.hash.position.position to a Node and perform the necessary checks to make sure very thing is OK
-	 * @param position a db.data.structures.hash.position.position<T> that was passed by the user
-	 * @return a Node<T> that corresponds to the db.data.structures.hash.position.position<T>
+	 * Convert a main.db.data.structures.position.position to a Node and perform the necessary checks to make sure very thing is OK
+	 * @param position a main.db.data.structures.position.position<T> that was passed by the user
+	 * @return a Node<T> that corresponds to the main.db.data.structures.position.position<T>
 	 */
 	private Node<T> checkPosition(Position<T> position) {
 		if (!(position instanceof Node<?>)) {
-			throw new PositionListException("Invalid db.data.structures.hash.position.position");
+			throw new PositionListException("Invalid main.db.data.structures.position.position");
 		}
 		
 		//normally other checks are also done, but for brevity just the casting is performed.

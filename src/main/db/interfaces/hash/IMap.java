@@ -1,7 +1,7 @@
-package db.interfaces.hash;
+package main.db.interfaces.hash;
 
-import db.data.structures.hash.position.PositionList;
-import db.models.hash.HashField;
+import main.db.data.structures.position.PositionList;
+import main.db.models.hash.HashField;
 
 public interface IMap<K> {
 	public HashField remove(K key, String field);

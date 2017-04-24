@@ -1,4 +1,4 @@
-package db.interfaces.hash.position;
+package main.db.interfaces.position;
 
 /**
  * The position interface

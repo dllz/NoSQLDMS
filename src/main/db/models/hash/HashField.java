@@ -1,4 +1,4 @@
-package db.models.hash;
+package main.db.models.hash;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

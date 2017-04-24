@@ -1,10 +1,10 @@
-package db.data.structures.hash;
-import db.interfaces.hash.position.Position;
+package main.db.data.structures.hash;
+import main.db.interfaces.position.Position;
 
 import java.io.Serializable;
 
 /**
- * A node in the db.data.structures.hash.position.position List (this is just a doubly-linked node)
+ * A node in the main.db.data.structures.position.position List (this is just a doubly-linked node)
  *
  * @param <T> the object type for this node
  */
