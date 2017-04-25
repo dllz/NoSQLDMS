@@ -1,4 +1,4 @@
-package db.data.structures.tree;
+package db.models.tree;
 
 import db.interfaces.position.Position;
 

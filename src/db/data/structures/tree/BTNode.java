@@ -1,6 +1,7 @@
 package db.data.structures.tree;
 
 import db.interfaces.tree.BTPosition;
+import db.models.tree.NodeKey;
 
 /**
  * A Node in the tree
@@ -13,20 +14,35 @@ public class BTNode<T> implements BTPosition<T>
 	private BTNode<T> left  = null;
 	private BTNode<T> right = null;
 	private BTNode<T> parent = null;
-	
+	private Class type;
+	private NodeKey key;
+
+	public Class getType()
+	{
+		return type;
+	}
+
+	public NodeKey getKey()
+	{
+		return key;
+	}
+
 	/**
 	 * The constructor
-	 * 
+	 *
 	 * @param parent - The parent of this node (null if the root)
 	 * @param element the element that will be stored in the tree
 	 */
-	public BTNode(BTNode<T> parent, BTNode<T> left, BTNode<T> right, T element) {
+	public BTNode(BTNode<T> parent, BTNode<T> left, BTNode<T> right, NodeKey key, T element, Class type) {
 		this.parent = parent;
 		this.element = element;
 		this.left = left;
 		this.right = right;
+		this.type = type;
+		this.key = key;
+
 	}
-	
+
 	/**
 	 * Set the element in this node
 	 * @param element the element to set
@@ -34,8 +50,8 @@ public class BTNode<T> implements BTPosition<T>
 	public void setElement(T element) {
 		this.element = element;
 	}
-	
 
+	@Override
 	/**
 	 * Get element from the TreeNode
 	 */
@@ -51,28 +67,29 @@ public class BTNode<T> implements BTPosition<T>
 		return ret;
 	}
 
-
-	public BTNode<T> left() {
+	@Override
+	public BTPosition<T> left() {
 		return left;
 	}
 
-
-	public BTNode<T> right() {
+	@Override
+	public BTPosition<T> right() {
 		return right;
 	}
 
-	public BTNode<T> parent() {
+	@Override
+	public BTPosition<T> parent() {
 		return parent;
 	}
-	
+
 	public void setParent(BTNode<T> parent) {
 		this.parent = parent;
 	}
-	
+
 	public void setLeft(BTNode<T> left) {
 		this.left = left;
 	}
-	
+
 	public void setRight(BTNode<T> right) {
 		this.right = right;
 	}

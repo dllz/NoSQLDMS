@@ -107,6 +107,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 		{
 			PositionList<HashField> temp = new PositionList<HashField>(value);
 			map.addLast(new HashEntry(key, temp));
+			reverse.addFirst(new EntryStorage<K>(key, value));
 		}
 		else
 		{
