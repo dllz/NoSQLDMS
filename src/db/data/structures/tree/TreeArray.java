@@ -11,8 +11,8 @@ import java.util.Iterator;
  */
 public class TreeArray
 {
-    private PositionList<BinaryTree<Object>> list;
-    private PositionList<BTNode> reverse;
+    private PositionList<BinaryTree<String>> list;
+    private PositionList<BTNode<String>> reverse;
 
     public TreeArray()
     {
@@ -20,19 +20,19 @@ public class TreeArray
         reverse = new PositionList<>();
     }
 
-    public synchronized void addLeft(String key, EntryKeys keys, Object value, Class type) {
+    public synchronized void addLeft(String key, EntryKeys keys, String value) {
         if(getTree(key) == null)
         {
-            BTNode<Object> temp = new BTNode<>(null, null, null, new NodeKey(key, keys.getKey()), value, type);
+            BTNode<String> temp = new BTNode<>(null, null, null, new NodeKey(key, keys.getKey()), value);
             reverse.addLast(temp);
-            BinaryTree<Object> tempTree = new BinaryTree<>(key, temp);
+            BinaryTree<String> tempTree = new BinaryTree<>(key, temp);
 
             list.addLast(tempTree);
         }
         else
         {
-            Iterator<BinaryTree<Object>> treeIterator = list.iterator();
-            BinaryTree<Object> tree = null;
+            Iterator<BinaryTree<String>> treeIterator = list.iterator();
+            BinaryTree<String> tree = null;
             while(treeIterator.hasNext())
             {
                 tree = treeIterator.next();
@@ -40,7 +40,7 @@ public class TreeArray
                 {
                     BTNode parent = tree.searchNode(keys.getParentKey());
                     BTNode right = tree.searchNode(keys.getRightKey());
-                    BTNode<Object> node = new BTNode<Object>(parent, null, right, new NodeKey(key, keys.getKey()), value, type);
+                    BTNode<String> node = new BTNode<>(parent, null, right, new NodeKey(key, keys.getKey()), value);
                     reverse.addLast(node);
                     parent.setLeft(node);
                 }
@@ -48,19 +48,19 @@ public class TreeArray
         }
     }
 
-    public synchronized void addRight(String key, EntryKeys keys, Object value, Class type) {
+    public synchronized void addRight(String key, EntryKeys keys, String value) {
         if(getTree(key) == null)
         {
-            BTNode<Object> temp = new BTNode<>(null, null, null, new NodeKey(key, keys.getKey()), value, type);
+            BTNode<String> temp = new BTNode<>(null, null, null, new NodeKey(key, keys.getKey()), value);
             reverse.addLast(temp);
-            BinaryTree<Object> tempTree = new BinaryTree<>(key, temp);
+            BinaryTree<String> tempTree = new BinaryTree<>(key, temp);
 
             list.addLast(tempTree);
         }
         else
         {
-            Iterator<BinaryTree<Object>> treeIterator = list.iterator();
-            BinaryTree<Object> tree = null;
+            Iterator<BinaryTree<String>> treeIterator = list.iterator();
+            BinaryTree<String> tree = null;
             while(treeIterator.hasNext())
             {
                 tree = treeIterator.next();
@@ -68,7 +68,7 @@ public class TreeArray
                 {
                     BTNode parent = tree.searchNode(keys.getParentKey());
                     BTNode left = tree.searchNode(keys.getLeftKey());
-                    BTNode<Object> node = new BTNode<Object>(parent, left, null, new NodeKey(key, keys.getKey()), value, type);
+                    BTNode<String> node = new BTNode<>(parent, left, null, new NodeKey(key, keys.getKey()), value);
                     reverse.addLast(node);
                     parent.setRight(node);
                 }
@@ -76,25 +76,25 @@ public class TreeArray
         }
     }
 
-    public synchronized void addRoot(String key, EntryKeys keys, Object value, Class type) {
+    public synchronized void addRoot(String key, EntryKeys keys, String value) {
         if(getTree(key) == null)
         {
-            BTNode<Object> temp = new BTNode<>(null, null, null, new NodeKey(key, keys.getKey()), value, type);
+            BTNode<String> temp = new BTNode<>(null, null, null, new NodeKey(key, keys.getKey()), value);
             reverse.addLast(temp);
-            BinaryTree<Object> tempTree = new BinaryTree<>(key, temp);
+            BinaryTree<String> tempTree = new BinaryTree<>(key, temp);
 
             list.addLast(tempTree);
         }
         else
         {
-            Iterator<BinaryTree<Object>> treeIterator = list.iterator();
-            BinaryTree<Object> tree = null;
+            Iterator<BinaryTree<String>> treeIterator = list.iterator();
+            BinaryTree<String> tree = null;
             while(treeIterator.hasNext())
             {
                 tree = treeIterator.next();
                 if(tree.getKey().equals(key))
                 {
-                    BTNode<Object> node = new BTNode<Object>(null, null, null, new NodeKey(key, keys.getKey()), value, type);
+                    BTNode<String> node = new BTNode<>(null, null, null, new NodeKey(key, keys.getKey()), value);
                     reverse.addLast(node);
                     tree.setRoot(node);
                 }
@@ -104,8 +104,8 @@ public class TreeArray
 
     public synchronized BinaryTree getTree(String key)
     {
-        Iterator<BinaryTree<Object>> treeIterator = list.iterator();
-        BinaryTree<Object> tree = null;
+        Iterator<BinaryTree<String>> treeIterator = list.iterator();
+        BinaryTree<String> tree = null;
         while(treeIterator.hasNext())
         {
             tree = treeIterator.next();
@@ -121,7 +121,7 @@ public class TreeArray
     public synchronized PositionList<NodeKey> search (Object value)
     {
         PositionList<NodeKey> foundList = new PositionList<>();
-        Iterator<BTNode> nodeIt = reverse.iterator();
+        Iterator<BTNode<String>> nodeIt = reverse.iterator();
         BTNode entry = null;
         while (nodeIt.hasNext())
         {
@@ -154,36 +154,36 @@ public class TreeArray
         return null;
     }
 
-    public synchronized PositionList<Object> inOrderTraversal(String key)
+    public synchronized PositionList<String> inOrderTraversal(String key)
     {
-        BinaryTree<Object> tree = getTree(key);
+        BinaryTree<String> tree = getTree(key);
         if(tree != null)
         {
-            PositionList<Object> elemts = new PositionList<>();
+            PositionList<String> elemts = new PositionList<>();
             tree.InorderElementTraversal(elemts, tree.root());
             return elemts;
         }
         return null;
     }
 
-    public synchronized PositionList<Object> PostOrderTraversal(String key)
+    public synchronized PositionList<String> PostOrderTraversal(String key)
     {
-        BinaryTree<Object> tree = getTree(key);
+        BinaryTree<String> tree = getTree(key);
         if(tree != null)
         {
-            PositionList<Object> elemts = new PositionList<>();
+            PositionList<String> elemts = new PositionList<>();
             tree.PostOrderElementTraversal(elemts, tree.root());
             return elemts;
         }
         return null;
     }
 
-    public synchronized PositionList<Object> PreOrderTraversal(String key)
+    public synchronized PositionList<String> PreOrderTraversal(String key)
     {
-        BinaryTree<Object> tree = getTree(key);
+        BinaryTree<String> tree = getTree(key);
         if(tree != null)
         {
-            PositionList<Object> elemts = new PositionList<>();
+            PositionList<String> elemts = new PositionList<>();
             tree.PreorderElementTraversal(elemts, tree.root());
             return elemts;
         }

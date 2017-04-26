@@ -22,7 +22,7 @@ public class BinaryTree<T> implements Iterable<T> {
 	 * Create a new tree, with a null node in the root;
 	 */
 	public BinaryTree(String key) {
-		root = new BTNode<T>(null, null, null, null, null, null);
+		root = new BTNode<T>(null, null, null, null, null);
 		size = 0;
 		this.key = key;
 	}

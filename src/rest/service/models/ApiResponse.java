@@ -37,6 +37,7 @@ public class ApiResponse
 
     public ApiResponse()
     {
-
+        this.Status = ReponseCodes.SUCCESS;
+        Result = null;
     }
 }

@@ -14,13 +14,7 @@ public class BTNode<T> implements BTPosition<T>
 	private BTNode<T> left  = null;
 	private BTNode<T> right = null;
 	private BTNode<T> parent = null;
-	private Class type;
 	private NodeKey key;
-
-	public Class getType()
-	{
-		return type;
-	}
 
 	public NodeKey getKey()
 	{
@@ -33,12 +27,11 @@ public class BTNode<T> implements BTPosition<T>
 	 * @param parent - The parent of this node (null if the root)
 	 * @param element the element that will be stored in the tree
 	 */
-	public BTNode(BTNode<T> parent, BTNode<T> left, BTNode<T> right, NodeKey key, T element, Class type) {
+	public BTNode(BTNode<T> parent, BTNode<T> left, BTNode<T> right, NodeKey key, T element) {
 		this.parent = parent;
 		this.element = element;
 		this.left = left;
 		this.right = right;
-		this.type = type;
 		this.key = key;
 
 	}
