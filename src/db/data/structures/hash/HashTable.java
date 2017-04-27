@@ -13,14 +13,19 @@ import java.util.Iterator;
 
 public class HashTable<K> implements IMap<K>, Serializable
 {
-	private PositionList<HashEntry<K,PositionList<HashField>>> map;
+	private HashEntry<K,PositionList<HashField>>[] map;
 	private PositionList<EntryStorage<K>> reverse;
+	private final int TABLE_SIZE = 1024;
 	/**
 	 * Default constructor
 	 */
 	public HashTable() {
-		map	= new PositionList<HashEntry<K,PositionList<HashField>>>();
-		reverse = new PositionList<EntryStorage<K>>();
+		map	= new HashEntry[TABLE_SIZE];
+		for (int i = 0; i < map.length; i++)
+		{
+			map[i] = null;
+		}
+		reverse = new PositionList<>();
 	}
 
 
@@ -28,27 +33,23 @@ public class HashTable<K> implements IMap<K>, Serializable
 	 * Remove an item from the hash table
 	 */
 	public synchronized HashField remove(K key, String field) {
-		Iterator<HashEntry<K,PositionList<HashField>>> keyIterator = map.iterator();
-		HashEntry<K,PositionList<HashField>> item;
-		while (keyIterator.hasNext()) {
-			item = keyIterator.next();
-			if(item.getKey().equals(key))
+		int pos = HashString(key.toString());
+		HashEntry<K,PositionList<HashField>> item = map[pos];
+		if(item != null)
+		{
+			Iterator<HashField> bucketIterator = item.getValue().iterator();
+			HashField value;
+			while(bucketIterator.hasNext())
 			{
-				Iterator<HashField> bucketIterator = item.getValue().iterator();
-				HashField value;
-				while(bucketIterator.hasNext())
+				value = bucketIterator.next();
+				if(value.getField().equals(field))
 				{
-					value = bucketIterator.next();
-					if(value.getField().equals(field))
-					{
-						bucketIterator.remove();
-						reverse.remove(searchPos(key, field));
-						return value;
-					}
-					value = null;
+					bucketIterator.remove();
+					reverse.remove(searchPos(key, field));
+					return value;
 				}
+				value = null;
 			}
-			item = null;
 		}
 		return null;
 	}
@@ -59,41 +60,34 @@ public class HashTable<K> implements IMap<K>, Serializable
 	 * @returns the value for the associated key
 	 */
 	public synchronized HashField get(K key, String field) {
-		Iterator<HashEntry<K,PositionList<HashField>>> keyIterator = map.iterator();
-		HashEntry<K,PositionList<HashField>> item;
-		while (keyIterator.hasNext()) {
-			item = keyIterator.next();
-			if(item.getKey().equals(key))
+		int pos = HashString(key.toString());
+		HashEntry<K,PositionList<HashField>> item = map[pos];
+		if(item != null)
+		{
+			Iterator<HashField> bucketIterator = item.getValue().iterator();
+			HashField value;
+			while (bucketIterator.hasNext())
 			{
-				Iterator<HashField> bucketIterator = item.getValue().iterator();
-				HashField value;
-				while(bucketIterator.hasNext())
+				value = bucketIterator.next();
+				if (value.getField().equals(field))
 				{
-					value = bucketIterator.next();
-					if(value.getField().equals(field))
-					{
-						return value;
-					}
-					value = null;
+					return value;
 				}
+				value = null;
 			}
-			item = null;
 		}
+
 		return null;
 	}
 
 	public synchronized PositionList<HashField> getAll(K key)
 	{
-		Iterator<HashEntry<K,PositionList<HashField>>> keyIterator = map.iterator();
-		HashEntry<K,PositionList<HashField>> item;
-		while (keyIterator.hasNext()) {
-			item = keyIterator.next();
-			if(item.getKey().equals(key))
+		int pos = HashString(key.toString());
+		HashEntry<K,PositionList<HashField>> item = map[pos];
+		if(item != null)
 			{
 				return item.getValue();
 			}
-			item = null;
-		}
 		return null;
 	}
 
@@ -106,34 +100,30 @@ public class HashTable<K> implements IMap<K>, Serializable
 		if(getAll(key) == null)
 		{
 			PositionList<HashField> temp = new PositionList<HashField>(value);
-			map.addLast(new HashEntry(key, temp));
-			reverse.addFirst(new EntryStorage<K>(key, value));
+			int pos = HashString(key.toString());
+			map[pos] = new HashEntry(key, temp);
+			reverse.addFirst(new EntryStorage<>(key, value));
 		}
 		else
 		{
-			Iterator<HashEntry<K,PositionList<HashField>>> keyIterator = map.iterator();
-			HashEntry<K,PositionList<HashField>> item;
-			while (keyIterator.hasNext()) {
-				item = keyIterator.next();
-				if(item.getKey().equals(key))
+			int pos = HashString(key.toString());
+			HashEntry<K,PositionList<HashField>> item = map[pos];
+			if(item != null)
 				{
 					Iterator<HashField> bucketIterator = item.getValue().iterator();
-					HashField pos;
+					HashField posi;
 					while(bucketIterator.hasNext())
 					{
-						pos = bucketIterator.next();
-						if(pos.equal(value))
+						posi = bucketIterator.next();
+						if(posi.equal(value))
 						{
-							pos.setValue(value.getValue());
+							posi.setValue(value.getValue());
 							reverse.addFirst(new EntryStorage<K>(key, value));
 							return;
 						}
-						pos = null;
 					}
 					item.getValue().addFirst(value);
 				}
-				item = null;
-			}
 		}
 
 
@@ -188,5 +178,8 @@ public class HashTable<K> implements IMap<K>, Serializable
 		return foundList;
 	}
 
-
+	private int HashString(String key)
+	{
+		return key.hashCode() % TABLE_SIZE;
+	}
 }
