@@ -98,6 +98,14 @@ public class PositionList<T> implements IList<T>, Serializable
 		return element;
 	}
 
+	public T removeFirst()
+	{
+		Node<T> first = header;
+		header.getNext().setPrev(header.getPrev());
+		header = header.getNext();
+		return first.element();
+	}
+
 	/**
 	 * Return the front of the list
 	 * @return the first db.data.structures.position.position<T> in the list
