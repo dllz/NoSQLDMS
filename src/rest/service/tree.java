@@ -3,6 +3,7 @@ package rest.service;
 import db.data.structures.position.PositionList;
 import db.data.structures.tree.TreeArray;
 import db.models.tree.EntryKeys;
+import db.models.tree.KeyValue;
 import db.models.tree.NodeKey;
 import org.codehaus.jackson.map.ObjectMapper;
 import rest.service.models.ApiResponse;
@@ -19,48 +20,48 @@ import java.util.Iterator;
 /**
  * Created by danie on 2017/04/25.
  */
-@Path("hash/")
+@Path("tree/")
 public class tree
 {
 	private static TreeArray trees = new TreeArray();
 
 	@GET
-	@Path("putleft/tree={treekey}/right={rightkey}&parent={parentkey}/key={key}&value={value}")
+	@Path("putleft/{treekey}/{rightkey}/{parentkey}/{key}/{value}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public static String putLeft(@PathParam("treekey") String treekey, @PathParam("rightkey") String rightkey, @PathParam("parentkey") String parentkey, @PathParam("value") String value, @PathParam("key") String key)
+		public static String putLeft(@PathParam("treekey") String treekey, @PathParam("rightkey") String rightkey, @PathParam("parentkey") String parentkey, @PathParam("value") String value, @PathParam("key") String key)
 	{
-		trees.addLeft(treekey, new EntryKeys(parentkey, null, rightkey, key), value);
+		String res = trees.addLeft(treekey, new EntryKeys(parentkey, null, rightkey, key), value);
 		ObjectMapper map = new ObjectMapper();
 		try
 		{
-			return map.writeValueAsString(new ApiResponse(null));
+			return map.writeValueAsString(new ApiResponse(res));
 		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		return "";
+		return res;
 	}
 
 	@GET
-	@Path("putright/tree={treekey}/left={leftkey}&parent={parentkey}/key={key}&value={value}")
+	@Path("putright/{treekey}/{leftkey}/{parentkey}/{key}/{value}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String putRight(@PathParam("treekey") String treekey, @PathParam("leftkey") String leftkey, @PathParam("parentkey") String parentkey, @PathParam("value") String value, @PathParam("key") String key)
 	{
-		trees.addRight(
+		String res = trees.addRight(
 				treekey, new EntryKeys(parentkey, leftkey, null, key), value);
 		ObjectMapper map = new ObjectMapper();
 		try
 		{
-			return map.writeValueAsString(new ApiResponse(null));
+			return map.writeValueAsString(new ApiResponse(res));
 		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		return "";
+		return res;
 	}
 
 	@GET
-	@Path("putroot/tree={treekey}/key={key}&value={value}")
+	@Path("putroot/{treekey}/{key}/{value}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String putRoot(@PathParam("treekey") String treekey, @PathParam("value") String value, @PathParam("key") String key)
 	{
@@ -68,7 +69,7 @@ public class tree
 		trees.addRoot(treekey, new EntryKeys(null, null, null, key), value);
 		try
 		{
-			return map.writeValueAsString(new ApiResponse(null));
+			return map.writeValueAsString(new ApiResponse("Added"));
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -112,7 +113,7 @@ public class tree
 	}
 
 	@GET
-	@Path("get/treekey={treekey}&nodekey={nodekey}")
+	@Path("get/{treekey}/{nodekey}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String getElement(@PathParam("treekey") String tkey, @PathParam("nodekey") String nodekey)
 	{
@@ -134,7 +135,7 @@ public class tree
 	public static String inOrder(@PathParam("key") String key)
 	{
 		ObjectMapper map = new ObjectMapper();
-		PositionList<String> list = trees.inOrderTraversal(key);
+		PositionList<KeyValue<String>> list = trees.inOrderTraversal(key);
 		if (list == null)
 		{
 			try
@@ -145,8 +146,8 @@ public class tree
 				e.printStackTrace();
 			}
 		}
-		String[] arry = new String[list.size()];
-		Iterator<String> listit = list.iterator();
+		KeyValue[] arry = new KeyValue[list.size()];
+		Iterator<KeyValue<String>> listit = list.iterator();
 		int count = 0;
 		while (listit.hasNext())
 		{
@@ -169,7 +170,7 @@ public class tree
 	public static String preOrder(@PathParam("key") String key)
 	{
 		ObjectMapper map = new ObjectMapper();
-		PositionList<String> list = trees.PreOrderTraversal(key);
+		PositionList<KeyValue<String>> list = trees.PreOrderTraversal(key);
 		if (list == null)
 		{
 			try
@@ -180,8 +181,8 @@ public class tree
 				e.printStackTrace();
 			}
 		}
-		String[] arry = new String[list.size()];
-		Iterator<String> listit = list.iterator();
+		KeyValue[] arry = new KeyValue[list.size()];
+		Iterator<KeyValue<String>> listit = list.iterator();
 		int count = 0;
 		while (listit.hasNext())
 		{
@@ -204,7 +205,7 @@ public class tree
 	public static String postOrder(@PathParam("key") String key)
 	{
 		ObjectMapper map = new ObjectMapper();
-		PositionList<String> list = trees.PostOrderTraversal(key);
+		PositionList<KeyValue<String>> list = trees.PostOrderTraversal(key);
 		if (list == null)
 		{
 			try
@@ -215,8 +216,8 @@ public class tree
 				e.printStackTrace();
 			}
 		}
-		String[] arry = new String[list.size()];
-		Iterator<String> listit = list.iterator();
+		KeyValue[] arry = new KeyValue[list.size()];
+		Iterator<KeyValue<String>> listit = list.iterator();
 		int count = 0;
 		while (listit.hasNext())
 		{
@@ -226,22 +227,6 @@ public class tree
 		try
 		{
 			return map.writeValueAsString(new ApiResponse(arry));
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		return "";
-	}
-
-	@GET
-	@Path("get/tree/{treekey}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public static String getTree(@PathParam("treekey") String tkey)
-	{
-		ObjectMapper map = new ObjectMapper();
-		try
-		{
-			return map.writeValueAsString(new ApiResponse(trees.getTree(tkey)));
 		} catch (IOException e)
 		{
 			e.printStackTrace();

@@ -4,6 +4,8 @@ package db.data.structures.tree;
 import db.data.structures.position.PositionException;
 import db.data.structures.position.PositionList;
 import db.interfaces.tree.BTPosition;
+import db.models.tree.KeyValue;
+import db.models.tree.NodeKey;
 
 import java.util.Iterator;
 
@@ -13,7 +15,7 @@ import java.util.Iterator;
  *
  * @param <T> The type of the objects that will be contained in the tree
  */
-public class BinaryTree<T> implements Iterable<T>
+public class BinaryTree<T> implements Iterable<KeyValue<T>>
 {
 	private BTNode<T> root;
 	private int size;
@@ -29,6 +31,11 @@ public class BinaryTree<T> implements Iterable<T>
 		this.key = key;
 	}
 
+	public String getKey()
+	{
+		return key;
+	}
+
 	public BinaryTree(String key, BTNode elemetn)
 	{
 		root = elemetn;
@@ -40,11 +47,6 @@ public class BinaryTree<T> implements Iterable<T>
 	public BinaryTree(BTNode<T> root)
 	{
 		this.root = root;
-	}
-
-	public String getKey()
-	{
-		return key;
 	}
 
 	/**
@@ -138,9 +140,9 @@ public class BinaryTree<T> implements Iterable<T>
 	 *
 	 * @return an Iterator<T> over all of the elements
 	 */
-	public Iterator<T> elements()
+	public Iterator<KeyValue<T>> elements()
 	{
-		PositionList<T> elementList = new PositionList<T>();
+		PositionList<KeyValue<T>> elementList = new PositionList<>();
 		PreorderElementTraversal(elementList, root);
 		return elementList.iterator();
 	}
@@ -164,7 +166,7 @@ public class BinaryTree<T> implements Iterable<T>
 	 * Return an Iterator over all of the elements in this tree
 	 */
 	@Override
-	public Iterator<T> iterator()
+	public Iterator<KeyValue<T>> iterator()
 	{
 		return elements();
 	}
@@ -201,14 +203,14 @@ public class BinaryTree<T> implements Iterable<T>
 		BTNode<T> rootNode = checkPosition(root);
 		elements.addLast(rootNode);
 
-		if (hasLeft(root))
+		if (root.leftChild() != null)
 		{
-			nodeTraversal(elements, left(root));
+			nodeTraversal(elements, root.leftChild());
 		}
 
-		if (hasRight(root))
+		if (root.rigthChild() != null)
 		{
-			nodeTraversal(elements, right(root));
+			nodeTraversal(elements, root.rigthChild());
 		}
 	}
 
@@ -220,15 +222,15 @@ public class BinaryTree<T> implements Iterable<T>
 	 * @param root     The root of the subtree
 	 *                 5 marks ***********************************************************************************
 	 */
-	public void PreorderElementTraversal(PositionList<T> elements, BTPosition<T> root)
+	public void PreorderElementTraversal(PositionList<KeyValue<T>> elements, BTPosition<T> root)
 	{
 		if (root != null)
 		{
-			elements.addLast(root.element());
-			if (hasLeft(root))
-				PreorderElementTraversal(elements, root.left());
-			if (hasRight(root))
-				PreorderElementTraversal(elements, root.right());
+			elements.addLast(new KeyValue<>(root.key(), root.element()));
+			if (root.leftChild() != null)
+				PreorderElementTraversal(elements, root.leftChild());
+			if (root.rigthChild() != null)
+				PreorderElementTraversal(elements, root.rigthChild());
 		}
 	}
 
@@ -241,15 +243,15 @@ public class BinaryTree<T> implements Iterable<T>
 	 * @param root     The root of the subtree
 	 *                 5 marks ***********************************************************************************
 	 */
-	public void PostOrderElementTraversal(PositionList<T> elements, BTPosition<T> root)
+	public void PostOrderElementTraversal(PositionList<KeyValue<T>> elements, BTPosition<T> root)
 	{
 		if (root != null)
 		{
-			if (hasLeft(root))
-				PostOrderElementTraversal(elements, root.left());
-			if (hasRight(root))
-				PreorderElementTraversal(elements, root.right());
-			elements.addLast(root.element());
+			if (root.leftChild() != null)
+				PostOrderElementTraversal(elements, root.rigthChild());
+			if (root.rigthChild() != null)
+				PostOrderElementTraversal(elements, root.rigthChild());
+			elements.addLast(new KeyValue<>(root.key(), root.element()));
 		}
 	}
 
@@ -261,15 +263,15 @@ public class BinaryTree<T> implements Iterable<T>
 	 * @param root     The root of the subtree
 	 *                 5 marks ***********************************************************************************
 	 */
-	public void InorderElementTraversal(PositionList<T> elements, BTPosition<T> root)
+	public void InorderElementTraversal(PositionList<KeyValue<T>> elements, BTPosition<T> root)
 	{
 		if (root != null)
 		{
-			if (hasLeft(root))
-				InorderElementTraversal(elements, root.left());
-			elements.addLast(root.element());
-			if (hasRight(root))
-				InorderElementTraversal(elements, root.right());
+			if (root.leftChild() != null)
+				InorderElementTraversal(elements, root.leftChild());
+			elements.addLast(new KeyValue<>(root.key(), root.element()));
+			if (root.rigthChild() != null)
+				InorderElementTraversal(elements, root.rigthChild());
 		}
 	}
 
@@ -308,7 +310,7 @@ public class BinaryTree<T> implements Iterable<T>
 				return node;
 			}
 		}
-		return node;
+		return null;
 	}
 
 }

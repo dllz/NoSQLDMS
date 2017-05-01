@@ -118,7 +118,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 			{
 				PositionList<HashField> temp = new PositionList<>(value);
 				int pos = HashString(key.toString());
-				map[pos] = new HashEntry(key, temp);
+				map[pos] = new HashEntry<>(key, temp);
 				reverse.addFirst(new EntryStorage<>(key, value));
 			} else
 			{
@@ -165,7 +165,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 		EntryStorage<K> entry;
 		while (reverseI.hasNext())
 		{
-			Position pos = reverseI.getCursor();
+			Position<EntryStorage<K>> pos = reverseI.getCursor();
 			entry = reverseI.next();
 			if (entry.getKey().equals(key) && entry.getField().equals(field))
 			{
@@ -181,7 +181,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 	 * @param value the value of the field
 	 * @return a list of Key Value pairs
 	 */
-	public synchronized PositionList<EntryStorage<K>> search(String field, Object value)
+	public synchronized PositionList<EntryStorage<K>> search(String field, String value)
 	{
 		PositionList<EntryStorage<K>> foundList = new PositionList<>();
 		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<EntryStorage<K>>(reverse);
@@ -202,7 +202,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 	 * @param value the value of the field
 	 * @return a list of Key Value pairs
 	 */
-	public synchronized PositionList<EntryStorage<K>> search(Object value)
+	public synchronized PositionList<EntryStorage<K>> search(String value)
 	{
 		PositionList<EntryStorage<K>> foundList = new PositionList<>();
 		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<>(reverse);

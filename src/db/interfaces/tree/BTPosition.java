@@ -5,6 +5,9 @@ package db.interfaces.tree;
  *
  * @param <T> the type of the object for this position
  */
+
+import db.models.tree.NodeKey;
+
 /**
  * Created by danie on 2017/04/10.
  */
@@ -17,4 +20,10 @@ public interface BTPosition<T>
 	public BTPosition<T> right();
 
 	public BTPosition<T> parent();
+
+	public BTPosition<T> leftChild();
+
+	public BTPosition<T> rigthChild();
+
+	public NodeKey key();
 }

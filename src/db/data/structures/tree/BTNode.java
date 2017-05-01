@@ -14,7 +14,29 @@ public class BTNode<T> implements BTPosition<T>
 	private BTNode<T> left = null;
 	private BTNode<T> right = null;
 	private BTNode<T> parent = null;
+	private BTNode<T> leftChild = null;
+	private BTNode<T> rightChild = null;
 	private NodeKey key;
+
+	public BTNode<T> getLeftChild()
+	{
+		return leftChild;
+	}
+
+	public void setLeftChild(BTNode<T> leftChild)
+	{
+		this.leftChild = leftChild;
+	}
+
+	public BTNode<T> getRightChild()
+	{
+		return rightChild;
+	}
+
+	public void setRightChild(BTNode<T> rightChild)
+	{
+		this.rightChild = rightChild;
+	}
 
 	/**
 	 * The constructor
@@ -83,6 +105,24 @@ public class BTNode<T> implements BTPosition<T>
 		return parent;
 	}
 
+	@Override
+	public BTPosition<T> leftChild()
+	{
+		return getLeftChild();
+	}
+
+	@Override
+	public BTPosition<T> rigthChild()
+	{
+		return getRightChild();
+	}
+
+	@Override
+	public NodeKey key()
+	{
+		return getKey();
+	}
+
 	public void setParent(BTNode<T> parent)
 	{
 		this.parent = parent;
@@ -96,5 +136,12 @@ public class BTNode<T> implements BTPosition<T>
 	public void setRight(BTNode<T> right)
 	{
 		this.right = right;
+	}
+
+	public boolean equals(BTNode<T> position)
+	{
+		if(this.getKey().equals(position.getKey()) && this.element.equals(position.element))
+			return true;
+		return false;
 	}
 }

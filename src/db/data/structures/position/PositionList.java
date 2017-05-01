@@ -164,6 +164,8 @@ public class PositionList<T> implements IList<T>, Serializable
 	public Position<T> next(Position<T> p)
 	{
 		Node<T> node = checkPosition(p);
+		if(node == null)
+			return null;
 		return node.getNext();
 	}
 
@@ -242,9 +244,13 @@ public class PositionList<T> implements IList<T>, Serializable
 	 */
 	private Node<T> checkPosition(Position<T> position)
 	{
+		if(position == null)
+		{
+			return null;
+		}
 		if (!(position instanceof Node<?>))
 		{
-			throw new PositionListException("Invalid db.data.structures.position.position");
+			throw new PositionListException("Invalid db.data.structures.position.position trying to be casted");
 		}
 
 		Node<T> newNode = (Node<T>) position;

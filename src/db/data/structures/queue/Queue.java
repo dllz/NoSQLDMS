@@ -16,7 +16,7 @@ public class Queue
 	}
 
 	/**
-	 * Adds an entry to the end of the queue
+	 * Adds an entry to the end of the enqueue
 	 */
 	public synchronized Position<String> qeueu(String entry)
 	{
@@ -24,7 +24,7 @@ public class Queue
 	}
 
 	/**
-	 * Removes the oldest entry from the queue
+	 * Removes the oldest entry from the enqueue
 	 */
 	public synchronized String dequeue()
 	{

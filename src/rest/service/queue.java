@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * Created by danie on 2017/05/01.
  */
-@Path("queue/")
+@Path("enqueue/")
 public class queue
 {
 	private static Queue q = new Queue();
@@ -24,9 +24,8 @@ public class queue
 	@GET
 	@Path("enqueue/{value}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public static String queue(@PathParam("value") String value)
+	public static String enqueue(@PathParam("value") String value)
 	{
-		Position<String> temp = q.qeueu(value);
 		ObjectMapper map = new ObjectMapper();
 		try
 		{
