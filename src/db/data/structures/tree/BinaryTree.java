@@ -1,4 +1,4 @@
-//Overall BinaryTree class: 25 marks *****************************************
+
 package db.data.structures.tree;
 
 import db.data.structures.position.PositionException;

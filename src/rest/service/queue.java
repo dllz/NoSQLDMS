@@ -26,6 +26,7 @@ public class queue
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String enqueue(@PathParam("value") String value)
 	{
+		q.qeueu(value);
 		ObjectMapper map = new ObjectMapper();
 		try
 		{

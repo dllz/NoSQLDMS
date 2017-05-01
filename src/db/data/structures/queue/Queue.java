@@ -1,4 +1,4 @@
-package db.data.structures.queue;//Overall PriorityQueue class: 5 marks ***********************************************
+package db.data.structures.queue;
 
 import db.data.structures.position.PositionList;
 import db.interfaces.position.Position;
@@ -16,7 +16,9 @@ public class Queue
 	}
 
 	/**
-	 * Adds an entry to the end of the enqueue
+	 * Add an element to the back of the queue
+	 * @param entry the element to be added
+	 * @return the position of the element
 	 */
 	public synchronized Position<String> qeueu(String entry)
 	{
@@ -24,7 +26,8 @@ public class Queue
 	}
 
 	/**
-	 * Removes the oldest entry from the enqueue
+	 * Removes the oldest entry
+	 * @return String the oldest entry
 	 */
 	public synchronized String dequeue()
 	{
@@ -41,7 +44,8 @@ public class Queue
 
 
 	/**
-	 * Returns a string
+	 * The to string
+	 * @return String
 	 */
 	public synchronized String toString()
 	{
