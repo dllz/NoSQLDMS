@@ -21,16 +21,6 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 	private int size;
 	private String key;
 
-	/**
-	 * Create a new tree, with a null node in the root;
-	 */
-	public BinaryTree(String key)
-	{
-		root = new BTNode<T>(null, null, null, null, null);
-		size = 0;
-		this.key = key;
-	}
-
 	public String getKey()
 	{
 		return key;
@@ -44,11 +34,6 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 
 	}
 
-	public BinaryTree(BTNode<T> root)
-	{
-		this.root = root;
-	}
-
 	/**
 	 * Get the root of the tree
 	 *
@@ -59,81 +44,6 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 		return root;
 	}
 
-	/**
-	 * Get an iterator for the children of a node
-	 *
-	 * @param node a Position<T> which is a node in this tree;
-	 * @return an Iterator over the children of a node
-	 */
-	public BTPosition<T> left(BTPosition<T> node)
-	{
-		BTNode<T> treeNode = checkPosition(node);
-
-		if (hasLeft(treeNode))
-		{
-			return treeNode.left();
-		}
-		return null;
-	}
-
-	/**
-	 * Get an iterator for the children of a node
-	 *
-	 * @param node a Position<T> which is a node in this tree;
-	 * @return an Iterator over the children of a node
-	 */
-	public BTPosition<T> right(BTPosition<T> node)
-	{
-		BTNode<T> treeNode = checkPosition(node);
-
-		if (hasRight(treeNode))
-		{
-			return treeNode.right();
-		}
-		return null;
-	}
-
-	public boolean hasLeft(BTPosition<T> node)
-	{
-		BTNode<T> treeNode = checkPosition(node);
-
-		return treeNode.left() != null;
-	}
-
-	public boolean hasRight(BTPosition<T> node)
-	{
-		BTNode<T> treeNode = checkPosition(node);
-
-		return treeNode.right() != null;
-	}
-
-	/**
-	 * Get the parent of a node
-	 *
-	 * @param node a Position<T> which is a node in this tree
-	 * @return a Position<T> which is the parent of this node
-	 */
-	public BTPosition<T> parent(BTPosition<T> node)
-	{
-		return node.parent();
-	}
-
-	/**
-	 * Returns a list of all of the Positions in this tree. These could be
-	 * converted to a TreeNode<T> in order to operate on the tree
-	 *
-	 * @return A IList<BTPosition<T>> of all the positions in the tree
-	 * 5 marks ***********************************************************************************
-	 */
-	public PositionList<BTPosition<T>> positions()
-	{
-		PositionList<BTPosition<T>> tree = new PositionList<>();
-		if (!isEmpty())
-		{
-			nodeTraversal(tree, root());
-		}
-		return tree;
-	}
 
 	/**
 	 * Returns an iterator over all of the elements in this tree
@@ -147,21 +57,6 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 		return elementList.iterator();
 	}
 
-	/*
-	 * Calculates the depth of a Binary tree node position in the overall binary tree
-	 * 5 marks ***********************************************************************************
-	 */
-	public Integer nodeDepth(BTPosition<T> nodePos)
-	{
-		if (nodePos.parent() == null)
-		{
-			return 0;
-		} else
-		{
-			return 1 + nodeDepth(nodePos.parent());
-		}
-	}
-
 	/**
 	 * Return an Iterator over all of the elements in this tree
 	 */
@@ -169,26 +64,6 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 	public Iterator<KeyValue<T>> iterator()
 	{
 		return elements();
-	}
-
-	/**
-	 * The number of nodes in this tree
-	 *
-	 * @return the number of nodes in this tree
-	 */
-	public int size()
-	{
-		return size;
-	}
-
-	/**
-	 * Return true if the tree is empty
-	 *
-	 * @return true if the tree is empty, false if the tree is not empty;
-	 */
-	public boolean isEmpty()
-	{
-		return size == 0;
 	}
 
 	/**

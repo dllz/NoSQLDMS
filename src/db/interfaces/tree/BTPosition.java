@@ -3,7 +3,7 @@ package db.interfaces.tree;
 /**
  * The Binary Tree Position interface used for implementation
  *
- * @param <T> the type of the object for this position
+ * @param <T> the type of the generic for this object
  */
 
 import db.models.tree.NodeKey;

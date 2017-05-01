@@ -123,11 +123,6 @@ public class BTNode<T> implements BTPosition<T>
 		return getKey();
 	}
 
-	public void setParent(BTNode<T> parent)
-	{
-		this.parent = parent;
-	}
-
 	public void setLeft(BTNode<T> left)
 	{
 		this.left = left;
