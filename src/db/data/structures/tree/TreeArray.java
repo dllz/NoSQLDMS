@@ -16,12 +16,22 @@ public class TreeArray
 	private PositionList<BinaryTree<String>> list;
 	private PositionList<BTNode<String>> reverse;
 
+	/**
+	 * Default constructor to intialise the tree
+	 */
 	public TreeArray()
 	{
 		list = new PositionList<>();
 		reverse = new PositionList<>();
 	}
 
+	/**
+	 * Add a node to the left child of a parent
+	 * @param key The key of the node
+	 * @param keys an EntryKeys object holding all the keys that the node needs to be attached to
+	 * @param value The value to be stored
+	 * @return A string holding the result
+	 */
 	public synchronized String addLeft(String key, EntryKeys keys, String value)
 	{
 		if (getTree(key) == null)
@@ -66,6 +76,13 @@ public class TreeArray
 		return "Failed";
 	}
 
+	/**
+	 * Add a node to the right of a parent
+	 * @param key The key of the node
+	 * @param keys an EntryKeys object holding all the keys that the node needs to be attached to
+	 * @param value The value to be stored
+	 * @return A string holding the result
+	 */
 	public synchronized String addRight(String key, EntryKeys keys, String value)
 	{
 		if (getTree(key) == null)
@@ -110,6 +127,12 @@ public class TreeArray
 		return "Failed";
 	}
 
+	/**
+	 * Create the node a the roof of the tree
+	 * @param key The key of the node
+	 * @param keys an EntryKeys object holding all the keys that the node needs to be attached to
+	 * @param value The value to be stored
+	 */
 	public synchronized void addRoot(String key, EntryKeys keys, String value)
 	{
 		if (getTree(key) == null)
@@ -146,7 +169,12 @@ public class TreeArray
 		}
 	}
 
-	public synchronized BinaryTree getTree(String key)
+	/**
+	 * Gets a tree in the array
+	 * @param key
+	 * @return
+	 */
+	private synchronized BinaryTree getTree(String key)
 	{
 		Iterator<BinaryTree<String>> treeIterator = list.iterator();
 		BinaryTree<String> tree = null;
@@ -164,6 +192,11 @@ public class TreeArray
 		return null;
 	}
 
+	/**
+	 * Searches for matching keys
+	 * @param value the value to be looked for
+	 * @return a list of Nodekeys that match
+	 */
 	public synchronized PositionList<NodeKey> search(Object value)
 	{
 		PositionList<NodeKey> foundList = new PositionList<>();
@@ -180,6 +213,11 @@ public class TreeArray
 		return foundList;
 	}
 
+	/**
+	 * Get the node matching the key
+	 * @param key the key of the node u want
+	 * @return the node at the key
+	 */
 	public synchronized BTNode<Object> getNode(NodeKey key)
 	{
 		BinaryTree<Object> tree = getTree(key.getTreeKey());
@@ -190,6 +228,11 @@ public class TreeArray
 		return null;
 	}
 
+	/**
+	 * The element at a key
+	 * @param key the key of the element you want
+	 * @return the element at the key
+	 */
 	public synchronized Object getElement(NodeKey key)
 	{
 		BTNode<Object> node = getNode(key);
@@ -200,6 +243,11 @@ public class TreeArray
 		return null;
 	}
 
+	/**
+	 * Do an inorder transversal of a tree
+	 * @param key the key of the tree to transverse
+	 * @return a list of keyValues of the traversal
+	 */
 	public synchronized PositionList<KeyValue<String>> inOrderTraversal(String key)
 	{
 		BinaryTree<String> tree = getTree(key);
@@ -212,6 +260,11 @@ public class TreeArray
 		return null;
 	}
 
+	/**
+	 * Do an postorder transversal of a tree
+	 * @param key the key of the tree to transverse
+	 * @return a list of keyValues of the traversal
+	 */
 	public synchronized PositionList<KeyValue<String>> PostOrderTraversal(String key)
 	{
 		BinaryTree<String> tree = getTree(key);
@@ -224,6 +277,12 @@ public class TreeArray
 		return null;
 	}
 
+
+	/**
+	 * Do an preorder transversal of a tree
+	 * @param key the key of the tree to transverse
+	 * @return a list of keyValues of the traversal
+	 */
 	public synchronized PositionList<KeyValue<String>> PreOrderTraversal(String key)
 	{
 		BinaryTree<String> tree = getTree(key);

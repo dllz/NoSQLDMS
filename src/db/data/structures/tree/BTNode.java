@@ -18,31 +18,49 @@ public class BTNode<T> implements BTPosition<T>
 	private BTNode<T> rightChild = null;
 	private NodeKey key;
 
+	/**
+	 *
+	 * @return The left child
+	 */
 	public BTNode<T> getLeftChild()
 	{
 		return leftChild;
 	}
 
+	/**
+	 *
+	 * @param leftChild the left child to be set
+	 */
 	public void setLeftChild(BTNode<T> leftChild)
 	{
 		this.leftChild = leftChild;
 	}
 
+	/**
+	 *
+	 * @return the right child
+	 */
 	public BTNode<T> getRightChild()
 	{
 		return rightChild;
 	}
 
+	/**
+	 *
+	 * @param rightChild the right child to be set
+	 */
 	public void setRightChild(BTNode<T> rightChild)
 	{
 		this.rightChild = rightChild;
 	}
 
 	/**
-	 * The constructor
-	 *
-	 * @param parent  - The parent of this node (null if the root)
-	 * @param element the element that will be stored in the tree
+	 * Constructor
+	 * @param parent node to be added
+	 * @param left node to be addedc
+	 * @param right node to be added
+	 * @param key to be stored at
+	 * @param element to be added
 	 */
 	public BTNode(BTNode<T> parent, BTNode<T> left, BTNode<T> right, NodeKey key, T element)
 	{
@@ -133,6 +151,11 @@ public class BTNode<T> implements BTPosition<T>
 		this.right = right;
 	}
 
+	/**
+	 * Compare to objects
+	 * @param position
+	 * @return
+	 */
 	public boolean equals(BTNode<T> position)
 	{
 		if(this.getKey().equals(position.getKey()) && this.element.equals(position.element))

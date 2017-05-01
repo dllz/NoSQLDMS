@@ -36,7 +36,6 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 
 	/**
 	 * Get the root of the tree
-	 *
 	 * @return return the root of the tree
 	 */
 	public BTPosition<T> root()
@@ -47,7 +46,6 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 
 	/**
 	 * Returns an iterator over all of the elements in this tree
-	 *
 	 * @return an Iterator<T> over all of the elements
 	 */
 	public Iterator<KeyValue<T>> elements()
@@ -58,7 +56,8 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 	}
 
 	/**
-	 * Return an Iterator over all of the elements in this tree
+	 * iterator for the elements in the tree
+	 * @return
 	 */
 	@Override
 	public Iterator<KeyValue<T>> iterator()
@@ -67,10 +66,12 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 	}
 
 	/**
-	 * Perform a preorder traversal over all of the Positions in the list. These elements should be
+	 * Perform a traversal over all of the Positions in the list. These elements should be
 	 * added to the PositionList.
 	 *
-	 * @param elements a PositionList<T> that will hold all of the elements in this tree
+	 * This is done recurrsively
+	 *
+	 * @param elements a PositionList<BTPosition<T>> that will hold all of the elements in this tree
 	 * @param root     The root of the subtree
 	 */
 	public void nodeTraversal(PositionList<BTPosition<T>> elements, BTPosition<T> root)
@@ -90,12 +91,10 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 	}
 
 	/**
-	 * Perform a preorder traversal over all of the elements in the list. These elements should be
-	 * added to the PositionList.
+	 * Perform a PreOrderElement traversal over all of the elements in the tree
 	 *
-	 * @param elements a PositionList<T> that will hold all of the elements in this tree
+	 * @param elements a PositionList<KeyValue<T>> that will hold all of the elements in this tree
 	 * @param root     The root of the subtree
-	 *                 5 marks ***********************************************************************************
 	 */
 	public void PreorderElementTraversal(PositionList<KeyValue<T>> elements, BTPosition<T> root)
 	{
@@ -111,12 +110,10 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 
 
 	/**
-	 * Perform a preorder traversal over all of the Positions in the list. These elements should be
-	 * added to the PositionList.
+	 * Performs a PostOrderElement traversal over all of the elements in the tree
 	 *
-	 * @param elements a PositionList<T> that will hold all of the elements in this tree
+	 * @param elements a PositionList<KeyValue<T>> that will hold all of the elements in this tree
 	 * @param root     The root of the subtree
-	 *                 5 marks ***********************************************************************************
 	 */
 	public void PostOrderElementTraversal(PositionList<KeyValue<T>> elements, BTPosition<T> root)
 	{
@@ -131,12 +128,10 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 	}
 
 	/**
-	 * Perform an inorder traversal over all of the Positions in the list. These elements should be
-	 * added to the PositionList.
+	 * Perform an InOrder traversal over all of the elements in the tree
 	 *
 	 * @param elements a PositionList<T> that will hold all of the elements in this tree
 	 * @param root     The root of the subtree
-	 *                 5 marks ***********************************************************************************
 	 */
 	public void InorderElementTraversal(PositionList<KeyValue<T>> elements, BTPosition<T> root)
 	{
@@ -171,6 +166,11 @@ public class BinaryTree<T> implements Iterable<KeyValue<T>>
 		this.root = root;
 	}
 
+	/**
+	 * Searches for a node in the tree
+	 * @param key the key that you looking for
+	 * @return the found node, null if not found
+	 */
 	public BTNode<T> searchNode(String key)
 	{
 		PositionList<BTPosition<T>> nodes = new PositionList<>();
