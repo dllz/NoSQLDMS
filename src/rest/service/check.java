@@ -16,6 +16,7 @@ public class check
 	@Produces(MediaType.TEXT_PLAIN)
 	public static String check()
 	{
+		System.out.println("Check Called");
 		return "Api Running";
 	}
 }

@@ -32,6 +32,7 @@ public class hash
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String searchfv(@PathParam("field") String field, @PathParam("value") String value)
 	{
+		System.out.println("searchfv Called");
 		PositionList<EntryStorage<String>> list = ht.search(field, value);
 		ObjectMapper map = new ObjectMapper();
 		if (list == null)
@@ -67,6 +68,7 @@ public class hash
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String searchv(@PathParam("value") String value)
 	{
+		System.out.println("searchv Called");
 		PositionList<EntryStorage<String>> list = ht.search(value);
 		ObjectMapper map = new ObjectMapper();
 		if (list == null)
@@ -102,6 +104,7 @@ public class hash
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String hashput(@PathParam("key") String key, @PathParam("field") String field, @PathParam("value") String value)
 	{
+		System.out.println("put Called");
 		HashField temp = new HashField(field, value);
 		boolean res = ht.put(key, temp);
 		ObjectMapper map = new ObjectMapper();
@@ -120,6 +123,7 @@ public class hash
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String hashdel(@PathParam("key") String key, @PathParam("field") String field)
 	{
+		System.out.println("del Called");
 		HashField res = ht.remove(key, field);
 		ObjectMapper map = new ObjectMapper();
 		try
@@ -137,6 +141,7 @@ public class hash
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String hashget(@PathParam("key") String key, @PathParam("field") String field)
 	{
+		System.out.println("get Called");
 		ObjectMapper map = new ObjectMapper();
 		try
 		{
@@ -170,6 +175,7 @@ public class hash
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String hashgetall(@PathParam("key") String key)
 	{
+		System.out.println("getall Called");
 		PositionList<HashField> list = ht.getAll(key);
 		ObjectMapper map = new ObjectMapper();
 		if (list == null)

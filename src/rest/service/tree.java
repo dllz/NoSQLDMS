@@ -30,6 +30,7 @@ public class tree
 	@Produces(MediaType.APPLICATION_JSON)
 		public static String putLeft(@PathParam("treekey") String treekey, @PathParam("rightkey") String rightkey, @PathParam("parentkey") String parentkey, @PathParam("value") String value, @PathParam("key") String key)
 	{
+		System.out.println("putleft Called");
 		String res = trees.addLeft(treekey, new EntryKeys(parentkey, null, rightkey, key), value);
 		ObjectMapper map = new ObjectMapper();
 		try
@@ -47,6 +48,7 @@ public class tree
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String putRight(@PathParam("treekey") String treekey, @PathParam("leftkey") String leftkey, @PathParam("parentkey") String parentkey, @PathParam("value") String value, @PathParam("key") String key)
 	{
+		System.out.println("putright Called");
 		String res = trees.addRight(
 				treekey, new EntryKeys(parentkey, leftkey, null, key), value);
 		ObjectMapper map = new ObjectMapper();
@@ -65,6 +67,7 @@ public class tree
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String putRoot(@PathParam("treekey") String treekey, @PathParam("value") String value, @PathParam("key") String key)
 	{
+		System.out.println("putroot Called");
 		ObjectMapper map = new ObjectMapper();
 		trees.addRoot(treekey, new EntryKeys(null, null, null, key), value);
 		try
@@ -82,6 +85,7 @@ public class tree
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String search(@PathParam("key") String key)
 	{
+		System.out.println("search Called");
 		ObjectMapper map = new ObjectMapper();
 		PositionList<NodeKey> list = trees.search(key);
 		if (list == null)
@@ -117,6 +121,7 @@ public class tree
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String getElement(@PathParam("treekey") String tkey, @PathParam("nodekey") String nodekey)
 	{
+		System.out.println("get tree Called");
 		ObjectMapper map = new ObjectMapper();
 		try
 		{
@@ -134,6 +139,7 @@ public class tree
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String inOrder(@PathParam("key") String key)
 	{
+		System.out.println("inorder trans Called");
 		ObjectMapper map = new ObjectMapper();
 		PositionList<KeyValue<String>> list = trees.inOrderTraversal(key);
 		if (list == null)
@@ -169,6 +175,7 @@ public class tree
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String preOrder(@PathParam("key") String key)
 	{
+		System.out.println("pre order trans Called");
 		ObjectMapper map = new ObjectMapper();
 		PositionList<KeyValue<String>> list = trees.PreOrderTraversal(key);
 		if (list == null)
@@ -204,6 +211,7 @@ public class tree
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String postOrder(@PathParam("key") String key)
 	{
+		System.out.println("post order trans Called");
 		ObjectMapper map = new ObjectMapper();
 		PositionList<KeyValue<String>> list = trees.PostOrderTraversal(key);
 		if (list == null)
