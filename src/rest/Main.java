@@ -31,8 +31,8 @@ public class Main
 		rc.register(tree.class);
 		rc.register(queue.class);
 		final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
-		System.out.println(String.format("Jersey app started with WADL available at "
-				+ "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+		System.out.println(String.format("Web Server Started. WADL (API XML documentation can be found at:  "
+				+ "%sapplication.wadl\nPress any key to stop the server...", BASE_URI));
 		System.in.read();
 		server.stop();
 	}
