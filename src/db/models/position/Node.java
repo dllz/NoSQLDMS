@@ -1,4 +1,4 @@
-package db.data.structures.hash;
+package db.models.position;
 import db.interfaces.position.Position;
 
 import java.io.Serializable;

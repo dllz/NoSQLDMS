@@ -1,7 +1,7 @@
 package db.data.structures.position;
 
 import db.interfaces.hash.IList;
-import db.data.structures.hash.Node;
+import db.models.position.Node;
 import db.interfaces.position.Position;
 
 import java.io.Serializable;
@@ -24,7 +24,7 @@ public class PositionList<T> implements IList<T>, Serializable
 	 * Default constructor
 	 */
 	public PositionList() {
-		trailer = new Node<T>(null, null, null);
+		trailer = new Node<T>(null,	 null, null);
 		header = new Node<T>(trailer, null, null);
 		trailer.setPrev(header);
 		size = 0;

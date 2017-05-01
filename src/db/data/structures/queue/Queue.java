@@ -2,13 +2,14 @@ package db.data.structures.queue;//Overall PriorityQueue class: 5 marks ********
 
 import db.data.structures.position.PositionList;
 
-public class queue{
+public class Queue
+{
     private PositionList<String> list = null;
 
     /*
      * Default constructor
      */
-    public queue(){
+    public Queue(){
         this.list = new PositionList<>();
     }
 
