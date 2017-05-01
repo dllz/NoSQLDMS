@@ -11,6 +11,10 @@ public class ApiResponse
     private Object Result;
     private ReponseCodes Status;
 
+	public ApiResponse()
+	{
+
+	}
     public ApiResponse(Object result, ReponseCodes code)
     {
         Result = result;
@@ -35,9 +39,7 @@ public class ApiResponse
 
 
 
-    public ApiResponse()
-    {
-        this.Status = ReponseCodes.SUCCESS;
-        Result = null;
-    }
+
+
+
 }

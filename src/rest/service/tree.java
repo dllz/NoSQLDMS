@@ -28,7 +28,7 @@ public class tree
     public static ApiResponse putLeft(@PathParam("treekey") String treekey,  @PathParam("rightkey") String rightkey, @PathParam("parentkey") String parentkey, @PathParam("value") String value, @PathParam("key") String key)
     {
         trees.addLeft(treekey, new EntryKeys(parentkey, null, rightkey, key), value);
-        return new ApiResponse();
+        return new ApiResponse(null);
     }
 
     @GET
@@ -38,7 +38,7 @@ public class tree
     {
         trees.addRight(
                 treekey, new EntryKeys(parentkey, leftkey, null, key), value);
-        return new ApiResponse();
+        return new ApiResponse(null);
     }
 
     @GET
@@ -47,7 +47,7 @@ public class tree
     public static ApiResponse putRoot(@PathParam("treekey") String treekey, @PathParam("value") String value, @PathParam("key") String key)
     {
         trees.addRoot(treekey, new EntryKeys(null, null, null, key), value);
-        return new ApiResponse();
+        return new ApiResponse(null);
     }
 
     @GET
@@ -79,14 +79,6 @@ public class tree
         return new ApiResponse(trees.getElement(new NodeKey(tkey, nodekey)));
     }
 
-    @GET
-    @Path("save/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public static ApiResponse save()
-    {
-        //TreePersistance.save(tree);
-        return new ApiResponse("Saved");
-    }
 
     @GET
     @Path("transversal/inorder/{key}")

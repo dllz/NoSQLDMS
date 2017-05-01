@@ -1,10 +1,12 @@
 package db.models.hash;
 
-public class HashEntry<K,V> {
+import db.data.structures.position.PositionList;
+
+public class HashEntry<K> {
 	private K key;
-	private V value;
+	private PositionList<HashField> value;
 	
-	public HashEntry(K key, V value) {
+	public HashEntry(K key, PositionList<HashField> value) {
 		this.key = key;
 		this.value = value;
 	}
@@ -13,7 +15,7 @@ public class HashEntry<K,V> {
 		return key;
 	}
 	
-	public V getValue() {
+	public PositionList<HashField> getValue() {
 		return this.value;
 	}
 	
@@ -21,7 +23,7 @@ public class HashEntry<K,V> {
 		this.key = key;
 	}
 	
-	public void setValue(V value) {
+	public void setValue(PositionList<HashField> value) {
 		this.value = value;
 	}
 

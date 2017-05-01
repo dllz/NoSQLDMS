@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 public class HashTable<K> implements IMap<K>, Serializable
 {
-	private HashEntry<K,PositionList<HashField>>[] map;
+	private HashEntry<K>[] map;
 	private PositionList<EntryStorage<K>> reverse;
 	private final int TABLE_SIZE = 1024;
 	/**
@@ -34,7 +34,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 	 */
 	public synchronized HashField remove(K key, String field) {
 		int pos = HashString(key.toString());
-		HashEntry<K,PositionList<HashField>> item = map[pos];
+		HashEntry<K> item = map[pos];
 		if(item != null)
 		{
 			Iterator<HashField> bucketIterator = item.getValue().iterator();
@@ -61,7 +61,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 	 */
 	public synchronized HashField get(K key, String field) {
 		int pos = HashString(key.toString());
-		HashEntry<K,PositionList<HashField>> item = map[pos];
+		HashEntry<K> item = map[pos];
 		if(item != null)
 		{
 			Iterator<HashField> bucketIterator = item.getValue().iterator();
@@ -77,13 +77,13 @@ public class HashTable<K> implements IMap<K>, Serializable
 			}
 		}
 
-		return null;
+		return new HashField();
 	}
 
 	public synchronized PositionList<HashField> getAll(K key)
 	{
 		int pos = HashString(key.toString());
-		HashEntry<K,PositionList<HashField>> item = map[pos];
+		HashEntry<K> item = map[pos];
 		if(item != null)
 			{
 				return item.getValue();
@@ -96,19 +96,21 @@ public class HashTable<K> implements IMap<K>, Serializable
 	 * @param key the key for the item (unique)
 	 * @param value the value for the item
 	 */
-	public synchronized void put(K key, HashField value) {
-		if(getAll(key) == null)
+	public synchronized boolean put(K key, HashField value) {
+		try
 		{
-			PositionList<HashField> temp = new PositionList<HashField>(value);
-			int pos = HashString(key.toString());
-			map[pos] = new HashEntry(key, temp);
-			reverse.addFirst(new EntryStorage<>(key, value));
-		}
-		else
-		{
-			int pos = HashString(key.toString());
-			HashEntry<K,PositionList<HashField>> item = map[pos];
-			if(item != null)
+			if(getAll(key) == null)
+			{
+				PositionList<HashField> temp = new PositionList<>(value);
+				int pos = HashString(key.toString());
+				map[pos] = new HashEntry(key, temp);
+				reverse.addFirst(new EntryStorage<>(key, value));
+			}
+			else
+			{
+				int pos = HashString(key.toString());
+				HashEntry<K> item = map[pos];
+				if(item != null)
 				{
 					Iterator<HashField> bucketIterator = item.getValue().iterator();
 					HashField posi;
@@ -119,14 +121,18 @@ public class HashTable<K> implements IMap<K>, Serializable
 						{
 							posi.setValue(value.getValue());
 							reverse.addFirst(new EntryStorage<K>(key, value));
-							return;
 						}
 					}
 					item.getValue().addFirst(value);
 				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 
-
+		return true;
 	}
 
 

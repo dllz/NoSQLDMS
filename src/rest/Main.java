@@ -6,6 +6,8 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import rest.service.check;
+import rest.service.queue;
+import rest.service.tree;
 
 import javax.ws.rs.core.UriBuilder;
 import java.io.IOException;
@@ -23,15 +25,15 @@ public class Main
             .build();
     public static void main(String[] args) throws URISyntaxException, IOException
     {
-        hash.setHt(HtPersistance.readht());
         ResourceConfig rc = new ResourceConfig();
         rc.registerClasses(hash.class);
         rc.registerClasses(check.class);
+        rc.register(tree.class);
+        rc.register(queue.class);
         final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
         System.in.read();
-        hash.save();
         server.stop();
     }
 
