@@ -13,14 +13,16 @@ import java.util.Iterator;
 
 public class HashTable<K> implements IMap<K>, Serializable
 {
+	private final int TABLE_SIZE = 1024;
 	private HashEntry<K>[] map;
 	private PositionList<EntryStorage<K>> reverse;
-	private final int TABLE_SIZE = 1024;
+
 	/**
 	 * Default constructor
 	 */
-	public HashTable() {
-		map	= new HashEntry[TABLE_SIZE];
+	public HashTable()
+	{
+		map = new HashEntry[TABLE_SIZE];
 		for (int i = 0; i < map.length; i++)
 		{
 			map[i] = null;
@@ -31,18 +33,22 @@ public class HashTable<K> implements IMap<K>, Serializable
 
 	/**
 	 * Remove an item from the hash table
+	 * @param key the place you want to remove it
+	 * @param field the field at the key you want rmeoved
+	 * @return the removed hashfield
 	 */
-	public synchronized HashField remove(K key, String field) {
+	public synchronized HashField remove(K key, String field)
+	{
 		int pos = HashString(key.toString());
 		HashEntry<K> item = map[pos];
-		if(item != null)
+		if (item != null)
 		{
 			Iterator<HashField> bucketIterator = item.getValue().iterator();
 			HashField value;
-			while(bucketIterator.hasNext())
+			while (bucketIterator.hasNext())
 			{
 				value = bucketIterator.next();
-				if(value.getField().equals(field))
+				if (value.getField().equals(field))
 				{
 					bucketIterator.remove();
 					reverse.remove(searchPos(key, field));
@@ -56,13 +62,15 @@ public class HashTable<K> implements IMap<K>, Serializable
 
 	/**
 	 * Get the value for a given key
+	 *
 	 * @param key the key for the item
 	 * @returns the value for the associated key
 	 */
-	public synchronized HashField get(K key, String field) {
+	public synchronized HashField get(K key, String field)
+	{
 		int pos = HashString(key.toString());
 		HashEntry<K> item = map[pos];
-		if(item != null)
+		if (item != null)
 		{
 			Iterator<HashField> bucketIterator = item.getValue().iterator();
 			HashField value;
@@ -80,51 +88,57 @@ public class HashTable<K> implements IMap<K>, Serializable
 		return new HashField();
 	}
 
+	/**
+	 * Get all the fields at the key
+	 * @param key the key you want to get
+	 * @return a list of the fields
+	 */
 	public synchronized PositionList<HashField> getAll(K key)
 	{
 		int pos = HashString(key.toString());
 		HashEntry<K> item = map[pos];
-		if(item != null)
-			{
-				return item.getValue();
-			}
+		if (item != null)
+		{
+			return item.getValue();
+		}
 		return null;
 	}
 
 	/**
 	 * Put an item into the hash table
-	 * @param key the key for the item (unique)
+	 *
+	 * @param key   the key for the item (unique)
 	 * @param value the value for the item
 	 */
-	public synchronized boolean put(K key, HashField value) {
+	public synchronized boolean put(K key, HashField value)
+	{
 		try
 		{
-			if(getAll(key) == null)
+			if (getAll(key) == null)
 			{
 				PositionList<HashField> temp = new PositionList<>(value);
 				int pos = HashString(key.toString());
 				map[pos] = new HashEntry(key, temp);
 				reverse.addFirst(new EntryStorage<>(key, value));
-			}
-			else
+			} else
 			{
 				int pos = HashString(key.toString());
 				HashEntry<K> item = map[pos];
-				if(item != null)
+				if (item != null)
 				{
 					Iterator<HashField> bucketIterator = item.getValue().iterator();
 					HashField posi;
-					while(bucketIterator.hasNext())
+					while (bucketIterator.hasNext())
 					{
 						posi = bucketIterator.next();
-						if(posi.getField().equals(value.getField()))
+						if (posi.getField().equals(value.getField()))
 						{
 							posi.setValue(value.getValue());
 							Iterator<EntryStorage<K>> reverseit = reverse.iterator();
-							while(reverseit.hasNext())
+							while (reverseit.hasNext())
 							{
 								EntryStorage<K> temp = reverseit.next();
-								if(temp.getKey().equals(key) & temp.getField().equals(value.getField()))
+								if (temp.getKey().equals(key) & temp.getField().equals(value.getField()))
 								{
 									temp.setValue(value.getValue());
 									return true;
@@ -136,8 +150,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 					reverse.addFirst(new EntryStorage<K>(key, value));
 				}
 			}
-		}
-		catch(Exception e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -154,7 +167,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 		{
 			Position pos = reverseI.getCursor();
 			entry = reverseI.next();
-			if(entry.getKey().equals(key) && entry.getField().equals(field))
+			if (entry.getKey().equals(key) && entry.getField().equals(field))
 			{
 				return pos;
 			}
@@ -162,7 +175,13 @@ public class HashTable<K> implements IMap<K>, Serializable
 		return null;
 	}
 
-	public synchronized PositionList<EntryStorage<K>> search (String field, Object value)
+	/**
+	 * Find all the keys that match the field and value
+	 * @param field the field you are searching
+	 * @param value the value of the field
+	 * @return a list of Key Value pairs
+	 */
+	public synchronized PositionList<EntryStorage<K>> search(String field, Object value)
 	{
 		PositionList<EntryStorage<K>> foundList = new PositionList<>();
 		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<EntryStorage<K>>(reverse);
@@ -170,7 +189,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 		while (reverseI.hasNext())
 		{
 			entry = reverseI.next();
-			if(entry.getValue().equals(value) && entry.getField().equals(field))
+			if (entry.getValue().equals(value) && entry.getField().equals(field))
 			{
 				foundList.addLast(entry);
 			}
@@ -178,7 +197,12 @@ public class HashTable<K> implements IMap<K>, Serializable
 		return foundList;
 	}
 
-	public synchronized PositionList<EntryStorage<K>> search (Object value)
+	/**
+	 * Find all the keys that match the value
+	 * @param value the value of the field
+	 * @return a list of Key Value pairs
+	 */
+	public synchronized PositionList<EntryStorage<K>> search(Object value)
 	{
 		PositionList<EntryStorage<K>> foundList = new PositionList<>();
 		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<>(reverse);
@@ -186,7 +210,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 		while (reverseI.hasNext())
 		{
 			entry = reverseI.next();
-			if(entry.getValue().equals(value))
+			if (entry.getValue().equals(value))
 			{
 				foundList.addLast(entry);
 			}

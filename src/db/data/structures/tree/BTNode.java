@@ -11,23 +11,19 @@ import db.models.tree.NodeKey;
 public class BTNode<T> implements BTPosition<T>
 {
 	private T element = null;
-	private BTNode<T> left  = null;
+	private BTNode<T> left = null;
 	private BTNode<T> right = null;
 	private BTNode<T> parent = null;
 	private NodeKey key;
 
-	public NodeKey getKey()
-	{
-		return key;
-	}
-
 	/**
 	 * The constructor
 	 *
-	 * @param parent - The parent of this node (null if the root)
+	 * @param parent  - The parent of this node (null if the root)
 	 * @param element the element that will be stored in the tree
 	 */
-	public BTNode(BTNode<T> parent, BTNode<T> left, BTNode<T> right, NodeKey key, T element) {
+	public BTNode(BTNode<T> parent, BTNode<T> left, BTNode<T> right, NodeKey key, T element)
+	{
 		this.parent = parent;
 		this.element = element;
 		this.left = left;
@@ -36,11 +32,18 @@ public class BTNode<T> implements BTPosition<T>
 
 	}
 
+	public NodeKey getKey()
+	{
+		return key;
+	}
+
 	/**
 	 * Set the element in this node
+	 *
 	 * @param element the element to set
 	 */
-	public void setElement(T element) {
+	public void setElement(T element)
+	{
 		this.element = element;
 	}
 
@@ -48,42 +51,50 @@ public class BTNode<T> implements BTPosition<T>
 	/**
 	 * Get element from the TreeNode
 	 */
-	public T element() {
+	public T element()
+	{
 		return element;
 	}
 
 	/**
 	 * Return the String representation of the Node.
 	 */
-	public String toString() {
+	public String toString()
+	{
 		String ret = "(" + element.toString() + ")";
 		return ret;
 	}
 
 	@Override
-	public BTPosition<T> left() {
+	public BTPosition<T> left()
+	{
 		return left;
 	}
 
 	@Override
-	public BTPosition<T> right() {
+	public BTPosition<T> right()
+	{
 		return right;
 	}
 
 	@Override
-	public BTPosition<T> parent() {
+	public BTPosition<T> parent()
+	{
 		return parent;
 	}
 
-	public void setParent(BTNode<T> parent) {
+	public void setParent(BTNode<T> parent)
+	{
 		this.parent = parent;
 	}
 
-	public void setLeft(BTNode<T> left) {
+	public void setLeft(BTNode<T> left)
+	{
 		this.left = left;
 	}
 
-	public void setRight(BTNode<T> right) {
+	public void setRight(BTNode<T> right)
+	{
 		this.right = right;
 	}
 }

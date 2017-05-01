@@ -5,55 +5,55 @@ package db.models.hash;
  */
 public class EntryStorage<K>
 {
-    private K key;
-    private String field;
-    private Object value;
+	private K key;
+	private String field;
+	private Object value;
 
-    public EntryStorage()
-    {
-    }
+	public EntryStorage()
+	{
+	}
 
-    public EntryStorage(K key, String field, Object value)
-    {
-        this.key = key;
-        this.field = field;
-        this.value = value;
-    }
+	public EntryStorage(K key, String field, Object value)
+	{
+		this.key = key;
+		this.field = field;
+		this.value = value;
+	}
 
-    public EntryStorage(K key, HashField hf)
-    {
-        this.key = key;
-        this.field = hf.getField();
-        this.value = hf.getValue();
-    }
+	public EntryStorage(K key, HashField hf)
+	{
+		this.key = key;
+		this.field = hf.getField();
+		this.value = hf.getValue();
+	}
 
-    public K getKey()
-    {
-        return key;
-    }
+	public K getKey()
+	{
+		return key;
+	}
 
-    public void setKey(K key)
-    {
-        this.key = key;
-    }
+	public void setKey(K key)
+	{
+		this.key = key;
+	}
 
-    public String getField()
-    {
-        return field;
-    }
+	public String getField()
+	{
+		return field;
+	}
 
-    public void setField(String field)
-    {
-        this.field = field;
-    }
+	public void setField(String field)
+	{
+		this.field = field;
+	}
 
-    public Object getValue()
-    {
-        return value;
-    }
+	public Object getValue()
+	{
+		return value;
+	}
 
-    public void setValue(Object value)
-    {
-        this.value = value;
-    }
+	public void setValue(Object value)
+	{
+		this.value = value;
+	}
 }

@@ -5,23 +5,23 @@ package db.models.tree;
  */
 public class NodeKey
 {
-    private String treeKey;
-    private String nodeKey;
+	private String treeKey;
+	private String nodeKey;
 
-    public String getTreeKey()
-    {
-        return treeKey;
-    }
+	public NodeKey(String treeKey, String nodeKey)
+	{
 
-    public String getNodeKey()
-    {
-        return nodeKey;
-    }
+		this.treeKey = treeKey;
+		this.nodeKey = nodeKey;
+	}
 
-    public NodeKey(String treeKey, String nodeKey)
-    {
+	public String getTreeKey()
+	{
+		return treeKey;
+	}
 
-        this.treeKey = treeKey;
-        this.nodeKey = nodeKey;
-    }
+	public String getNodeKey()
+	{
+		return nodeKey;
+	}
 }

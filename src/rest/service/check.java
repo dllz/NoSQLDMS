@@ -11,11 +11,11 @@ import javax.ws.rs.core.MediaType;
 @Path("api/")
 public class check
 {
-    @GET
-    @Path("check")
-    @Produces(MediaType.TEXT_PLAIN)
-    public static String check()
-    {
-        return "Api Running";
-    }
+	@GET
+	@Path("check")
+	@Produces(MediaType.TEXT_PLAIN)
+	public static String check()
+	{
+		return "Api Running";
+	}
 }

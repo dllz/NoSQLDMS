@@ -8,38 +8,35 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ApiResponse
 {
-    private Object Result;
-    private ReponseCodes Status;
+	private Object Result;
+	private ReponseCodes Status;
 
 	public ApiResponse()
 	{
 
 	}
-    public ApiResponse(Object result, ReponseCodes code)
-    {
-        Result = result;
-        this.Status = code;
-    }
 
-    public ApiResponse(Object result)
-    {
-        Result = result;
-        this.Status = ReponseCodes.SUCCESS;
-    }
+	public ApiResponse(Object result, ReponseCodes code)
+	{
+		Result = result;
+		this.Status = code;
+	}
 
-    public ReponseCodes getStatus()
-    {
-        return Status;
-    }
+	public ApiResponse(Object result)
+	{
+		Result = result;
+		this.Status = ReponseCodes.SUCCESS;
+	}
 
-    public Object getResult()
-    {
-        return Result;
-    }
+	public ReponseCodes getStatus()
+	{
+		return Status;
+	}
 
-
-
-
+	public Object getResult()
+	{
+		return Result;
+	}
 
 
 }

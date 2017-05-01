@@ -10,52 +10,55 @@ import java.io.*;
  */
 public class TreePersistance
 {
-    public static void save(BinaryTree object)
-    {
-        FileOutputStream fout = null;
-        ObjectOutputStream oos = null;
-        try
-        {
-            fout = new FileOutputStream("data/tree.dat");
-            oos = new ObjectOutputStream(fout);
-            oos.writeObject(object);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+	public static void save(BinaryTree object)
+	{
+		FileOutputStream fout = null;
+		ObjectOutputStream oos = null;
+		try
+		{
+			fout = new FileOutputStream("data/tree.dat");
+			oos = new ObjectOutputStream(fout);
+			oos.writeObject(object);
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    public static TreeArray read()
-    {
-        FileInputStream streamIn = null;
-        ObjectInputStream objectinputstream = null;
-        TreeArray temp = new TreeArray();
-        try {
-            streamIn = new FileInputStream("data/tree.dat");
-            objectinputstream = new ObjectInputStream(streamIn);
-            TreeArray object = null;
-            object = (TreeArray) objectinputstream.readObject();
-            if(object != null)
-                return object;
+	public static TreeArray read()
+	{
+		FileInputStream streamIn = null;
+		ObjectInputStream objectinputstream = null;
+		TreeArray temp = new TreeArray();
+		try
+		{
+			streamIn = new FileInputStream("data/tree.dat");
+			objectinputstream = new ObjectInputStream(streamIn);
+			TreeArray object = null;
+			object = (TreeArray) objectinputstream.readObject();
+			if (object != null)
+				return object;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if(objectinputstream != null){
-                try
-                {
-                    objectinputstream .close();
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return temp;
-    }
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			if (objectinputstream != null)
+			{
+				try
+				{
+					objectinputstream.close();
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+		return temp;
+	}
 }

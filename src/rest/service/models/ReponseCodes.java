@@ -5,6 +5,7 @@ package rest.service.models;
  */
 public enum ReponseCodes
 {
-    NOT_FOUND,
-    SUCCESS
+	NOT_FOUND,
+	SUCCESS,
+	EMPTY
 }

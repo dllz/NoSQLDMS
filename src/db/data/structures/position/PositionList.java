@@ -1,8 +1,8 @@
 package db.data.structures.position;
 
 import db.interfaces.hash.IList;
-import db.models.position.Node;
 import db.interfaces.position.Position;
+import db.models.position.Node;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -19,17 +19,23 @@ public class PositionList<T> implements IList<T>, Serializable
 	private Node<T> header = null;
 	private Node<T> trailer = null;
 	private Integer size = 0;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public PositionList() {
-		trailer = new Node<T>(null,	 null, null);
+	public PositionList()
+	{
+		trailer = new Node<T>(null, null, null);
 		header = new Node<T>(trailer, null, null);
 		trailer.setPrev(header);
 		size = 0;
 	}
 
+	/**
+	 * Constructor that adds an entry immediately
+	 *
+	 * @param entry
+	 */
 	public PositionList(T entry)
 	{
 		trailer = new Node<T>(null, null, null);
@@ -38,13 +44,15 @@ public class PositionList<T> implements IList<T>, Serializable
 		size = 0;
 		addFirst(entry);
 	}
-	
+
 	/**
-	 * Add an element after a given node in the list
+	 * Add an element after the given node in the list
+	 * @return Position<T> the element added
 	 */
-	public Position<T> addAfter(Position<T> p, T item) {
+	public Position<T> addAfter(Position<T> p, T item)
+	{
 		Node<T> elem = checkPosition(p);
-		
+
 		Node<T> newNode = new Node<T>(null, null, item);
 		newNode.setPrev(elem);
 		newNode.setNext(elem.getNext());
@@ -55,11 +63,13 @@ public class PositionList<T> implements IList<T>, Serializable
 	}
 
 	/**
-	 * Add an element before a given node in a list
+	 * Add an element before the given node in a list
+	 * @return Position<T> the element added
 	 */
-	public Position<T> addBefore(Position<T> p, T item) {
+	public Position<T> addBefore(Position<T> p, T item)
+	{
 		Node<T> elem = checkPosition(p);
-		
+
 		Node<T> newNode = new Node<T>(null, null, item);
 		newNode.setPrev(elem.getPrev());
 		newNode.setNext(elem);
@@ -71,24 +81,30 @@ public class PositionList<T> implements IList<T>, Serializable
 
 	/**
 	 * Add an element to the start of the list
+	 * @return Position<T> the element added
 	 */
-	public Position<T> addFirst(T item) {
+	public Position<T> addFirst(T item)
+	{
 		return addAfter(header, item);
 	}
-	
+
 	/**
 	 * Add an element to the end of the list
+	 * @return Position<T> the element added
 	 */
-	public Position<T> addLast(T item) {
+	public Position<T> addLast(T item)
+	{
 		return addBefore(trailer, item);
 	}
-	
+
 	/**
-	 * Remove a specified node from the list. The removed element is returned
+	 * Remove a specified node from the list.
+	 * @return T The removed element
 	 */
-	public T remove(Position<T> p) {
+	public T remove(Position<T> p)
+	{
 		Node<T> elem = checkPosition(p);
-		
+
 		T element = elem.element();
 		elem.getPrev().setNext(elem.getNext());
 		elem.getNext().setPrev(elem.getPrev());
@@ -98,117 +114,148 @@ public class PositionList<T> implements IList<T>, Serializable
 		return element;
 	}
 
+	/**
+	 * Remove the first element from the list
+	 *
+	 * @return The first element
+	 */
 	public T removeFirst()
 	{
-		Node<T> first = header;
-		header.getNext().setPrev(header.getPrev());
-		header = header.getNext();
+		Node<T> first = header.getNext();
+		first.getNext().setPrev(header);
+		header.setNext(first.getNext());
 		return first.element();
 	}
 
 	/**
 	 * Return the front of the list
+	 *
 	 * @return the first db.data.structures.position.position<T> in the list
 	 */
-	public Position<T> first() {
-		if (header.getNext() == trailer) {
+	public Position<T> first()
+	{
+		if (header.getNext() == trailer)
+		{
 			throw new PositionListException("List is empty");
 		}
 		return header.getNext();
 	}
-	
+
 	/**
 	 * Returns the last element in the list
+	 *
 	 * @return the last db.data.structures.position.position<T> element in the list
 	 */
-	public Position<T> last() {
-		if (trailer.getPrev() == header) {
+	public Position<T> last()
+	{
+		if (trailer.getPrev() == header)
+		{
 			throw new PositionListException("List is empty");
 		}
 		return trailer.getPrev();
 	}
-	
+
 	/**
 	 * Get the next element in the list
+	 *
 	 * @param p an existing db.data.structures.position.position in the list
 	 * @return the db.data.structures.position.position<T> that corresponds to the next element
 	 */
-	public Position<T> next(Position<T> p) {
+	public Position<T> next(Position<T> p)
+	{
 		Node<T> node = checkPosition(p);
 		return node.getNext();
 	}
-	
+
 	/**
 	 * Get the previous element in the list
+	 *
 	 * @param p an exisiting db.data.structures.position.position in the list
 	 * @return the Posiiton<T> that corresponds to the prev elements
 	 */
-	public Position<T> prev(Position<T> p) {
+	public Position<T> prev(Position<T> p)
+	{
 		Node<T> node = checkPosition(p);
 		return node.getPrev();
 	}
-	
+
 	/**
-	 * Returns the node that contains the element that is specified as a parameter
+	 * Returns the node that contains the element that is specified
+	 * @return Position<T> the found node
 	 */
-	public Position<T> search(T elem) {
+	public Position<T> search(T elem)
+	{
 		Node<T> currentNode = header.getNext();
-		while (currentNode != trailer) {
-			if (currentNode.element().equals(elem)) {
+		while (currentNode != trailer)
+		{
+			if (currentNode.element().equals(elem))
+			{
 				return currentNode;
 			}
 			currentNode = currentNode.getNext();
 		}
 		return null;
 	}
-	
+
 	/**
-	 * Returns true if the list is empty
+	 * check if the list is empty
+	 * @return boolean true if empty
 	 */
-	public boolean isEmpty() {
+	public boolean isEmpty()
+	{
 		return (header.getNext() == trailer);
 	}
 
 	/**
-	 * Return the size of the list
+	 * the size of the list
+	 * @return int the size
 	 */
-	public Integer size() {
+	public int size()
+	{
 		return size;
 	}
 
+	/**
+	 * The tostring
+	 * @return
+	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		String result = "";
 		Node<T> currentNode = header.getNext();
-		
-		while (currentNode != trailer) {
+
+		while (currentNode != trailer)
+		{
 			result += currentNode.toString() + " ";
 			currentNode = currentNode.getNext();
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
-	 * Convert a db.data.structures.position.position to a Node and perform the necessary checks to make sure very thing is OK
-	 * @param position a db.data.structures.position.position<T> that was passed by the user
+	 * Convert a db.data.structures.position.position to a Node
+	 *
+	 * @param position a db.data.structures.position.position<T>
 	 * @return a Node<T> that corresponds to the db.data.structures.position.position<T>
 	 */
-	private Node<T> checkPosition(Position<T> position) {
-		if (!(position instanceof Node<?>)) {
+	private Node<T> checkPosition(Position<T> position)
+	{
+		if (!(position instanceof Node<?>))
+		{
 			throw new PositionListException("Invalid db.data.structures.position.position");
 		}
-		
-		//normally other checks are also done, but for brevity just the casting is performed.
-		
-		Node<T> newNode = (Node<T>)position;
+
+		Node<T> newNode = (Node<T>) position;
 		return newNode;
 	}
 
 	/**
 	 * Return a new iterator over the elements in this list
 	 */
-	public Iterator<T> iterator() {
+	public Iterator<T> iterator()
+	{
 		return new PositionListIterator<T>(this);
 	}
 }

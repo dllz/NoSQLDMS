@@ -8,46 +8,52 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class HashField extends Object
 {
-        private String field;
-        private String value;
+	private String field;
+	private String value;
 
-        public HashField(String field, String value) {
-            this.field = field;
-            this.value = value;
-        }
+	public HashField(String field, String value)
+	{
+		this.field = field;
+		this.value = value;
+	}
 
-    public HashField()
-    {
-    }
+	public HashField()
+	{
+	}
 
-    public String getField() {
-            return field;
-        }
+	public String getField()
+	{
+		return field;
+	}
 
-        public String getValue() {
-            return this.value;
-        }
+	public String getValue()
+	{
+		return this.value;
+	}
 
-        public void setKey(String field) {
-            this.field = field;
-        }
+	public void setValue(String value)
+	{
+		this.value = value;
+	}
 
-        public void setValue(String value) {
-            this.value = value;
-        }
+	public void setKey(String field)
+	{
+		this.field = field;
+	}
 
-        public String toString() {
-            return field + "," + value.toString();
-        }
+	public String toString()
+	{
+		return field + "," + value.toString();
+	}
 
-        public boolean equal(HashField object)
-        {
-            if(object.getField().equals(this.getField()) & object.getValue().equals(this.getValue()))
-            {
-                return true;
-            }
-            return false;
-        }
+	public boolean equal(HashField object)
+	{
+		if (object.getField().equals(this.getField()) & object.getValue().equals(this.getValue()))
+		{
+			return true;
+		}
+		return false;
+	}
 }
 
 

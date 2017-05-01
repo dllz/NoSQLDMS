@@ -13,7 +13,8 @@ import java.util.Iterator;
  *
  * @param <T> The type of the objects that will be contained in the tree
  */
-public class BinaryTree<T> implements Iterable<T> {
+public class BinaryTree<T> implements Iterable<T>
+{
 	private BTNode<T> root;
 	private int size;
 	private String key;
@@ -21,10 +22,24 @@ public class BinaryTree<T> implements Iterable<T> {
 	/**
 	 * Create a new tree, with a null node in the root;
 	 */
-	public BinaryTree(String key) {
+	public BinaryTree(String key)
+	{
 		root = new BTNode<T>(null, null, null, null, null);
 		size = 0;
 		this.key = key;
+	}
+
+	public BinaryTree(String key, BTNode elemetn)
+	{
+		root = elemetn;
+		size = 1;
+		this.key = key;
+
+	}
+
+	public BinaryTree(BTNode<T> root)
+	{
+		this.root = root;
 	}
 
 	public String getKey()
@@ -32,34 +47,28 @@ public class BinaryTree<T> implements Iterable<T> {
 		return key;
 	}
 
-	public BinaryTree(String key, BTNode elemetn) {
-		root = elemetn;
-		size = 1;
-		this.key = key;
-
-	}
-
-	public BinaryTree(BTNode<T> root) {
-		this.root = root;
-	}
-
 	/**
 	 * Get the root of the tree
+	 *
 	 * @return return the root of the tree
 	 */
-	public BTPosition<T> root() {
+	public BTPosition<T> root()
+	{
 		return root;
 	}
 
 	/**
 	 * Get an iterator for the children of a node
+	 *
 	 * @param node a Position<T> which is a node in this tree;
 	 * @return an Iterator over the children of a node
 	 */
-	public BTPosition<T> left(BTPosition<T> node) {
+	public BTPosition<T> left(BTPosition<T> node)
+	{
 		BTNode<T> treeNode = checkPosition(node);
 
-		if (hasLeft(treeNode)) {
+		if (hasLeft(treeNode))
+		{
 			return treeNode.left();
 		}
 		return null;
@@ -67,25 +76,30 @@ public class BinaryTree<T> implements Iterable<T> {
 
 	/**
 	 * Get an iterator for the children of a node
+	 *
 	 * @param node a Position<T> which is a node in this tree;
 	 * @return an Iterator over the children of a node
 	 */
-	public BTPosition<T> right(BTPosition<T> node) {
+	public BTPosition<T> right(BTPosition<T> node)
+	{
 		BTNode<T> treeNode = checkPosition(node);
 
-		if (hasRight(treeNode)) {
+		if (hasRight(treeNode))
+		{
 			return treeNode.right();
 		}
 		return null;
 	}
 
-	public boolean hasLeft(BTPosition<T> node) {
+	public boolean hasLeft(BTPosition<T> node)
+	{
 		BTNode<T> treeNode = checkPosition(node);
 
 		return treeNode.left() != null;
 	}
 
-	public boolean hasRight(BTPosition<T> node) {
+	public boolean hasRight(BTPosition<T> node)
+	{
 		BTNode<T> treeNode = checkPosition(node);
 
 		return treeNode.right() != null;
@@ -93,22 +107,26 @@ public class BinaryTree<T> implements Iterable<T> {
 
 	/**
 	 * Get the parent of a node
+	 *
 	 * @param node a Position<T> which is a node in this tree
 	 * @return a Position<T> which is the parent of this node
 	 */
-	public BTPosition<T> parent(BTPosition<T> node) {
+	public BTPosition<T> parent(BTPosition<T> node)
+	{
 		return node.parent();
 	}
 
 	/**
 	 * Returns a list of all of the Positions in this tree. These could be
 	 * converted to a TreeNode<T> in order to operate on the tree
+	 *
 	 * @return A IList<BTPosition<T>> of all the positions in the tree
 	 * 5 marks ***********************************************************************************
 	 */
-	public PositionList<BTPosition<T>> positions() {
+	public PositionList<BTPosition<T>> positions()
+	{
 		PositionList<BTPosition<T>> tree = new PositionList<>();
-		if(!isEmpty())
+		if (!isEmpty())
 		{
 			nodeTraversal(tree, root());
 		}
@@ -117,9 +135,11 @@ public class BinaryTree<T> implements Iterable<T> {
 
 	/**
 	 * Returns an iterator over all of the elements in this tree
+	 *
 	 * @return an Iterator<T> over all of the elements
 	 */
-	public Iterator<T> elements() {
+	public Iterator<T> elements()
+	{
 		PositionList<T> elementList = new PositionList<T>();
 		PreorderElementTraversal(elementList, root);
 		return elementList.iterator();
@@ -129,12 +149,12 @@ public class BinaryTree<T> implements Iterable<T> {
 	 * Calculates the depth of a Binary tree node position in the overall binary tree
 	 * 5 marks ***********************************************************************************
 	 */
-	public Integer nodeDepth(BTPosition<T> nodePos){
-		if(nodePos.parent() == null)
+	public Integer nodeDepth(BTPosition<T> nodePos)
+	{
+		if (nodePos.parent() == null)
 		{
 			return 0;
-		}
-		else
+		} else
 		{
 			return 1 + nodeDepth(nodePos.parent());
 		}
@@ -144,41 +164,50 @@ public class BinaryTree<T> implements Iterable<T> {
 	 * Return an Iterator over all of the elements in this tree
 	 */
 	@Override
-	public Iterator<T> iterator() {
+	public Iterator<T> iterator()
+	{
 		return elements();
 	}
 
 	/**
 	 * The number of nodes in this tree
+	 *
 	 * @return the number of nodes in this tree
 	 */
-	public int size() {
+	public int size()
+	{
 		return size;
 	}
 
 	/**
 	 * Return true if the tree is empty
+	 *
 	 * @return true if the tree is empty, false if the tree is not empty;
 	 */
-	public boolean isEmpty() {
+	public boolean isEmpty()
+	{
 		return size == 0;
 	}
 
 	/**
 	 * Perform a preorder traversal over all of the Positions in the list. These elements should be
 	 * added to the PositionList.
+	 *
 	 * @param elements a PositionList<T> that will hold all of the elements in this tree
-	 * @param root The root of the subtree
+	 * @param root     The root of the subtree
 	 */
-	public void nodeTraversal(PositionList<BTPosition<T>> elements, BTPosition<T> root) {
+	public void nodeTraversal(PositionList<BTPosition<T>> elements, BTPosition<T> root)
+	{
 		BTNode<T> rootNode = checkPosition(root);
 		elements.addLast(rootNode);
 
-		if (hasLeft(root)) {
+		if (hasLeft(root))
+		{
 			nodeTraversal(elements, left(root));
 		}
 
-		if (hasRight(root)) {
+		if (hasRight(root))
+		{
 			nodeTraversal(elements, right(root));
 		}
 	}
@@ -186,17 +215,19 @@ public class BinaryTree<T> implements Iterable<T> {
 	/**
 	 * Perform a preorder traversal over all of the elements in the list. These elements should be
 	 * added to the PositionList.
+	 *
 	 * @param elements a PositionList<T> that will hold all of the elements in this tree
-	 * @param root The root of the subtree
-	 * 5 marks ***********************************************************************************
+	 * @param root     The root of the subtree
+	 *                 5 marks ***********************************************************************************
 	 */
-	public void PreorderElementTraversal(PositionList<T> elements, BTPosition<T> root) {
-		if(root != null)
+	public void PreorderElementTraversal(PositionList<T> elements, BTPosition<T> root)
+	{
+		if (root != null)
 		{
 			elements.addLast(root.element());
-			if(hasLeft(root))
+			if (hasLeft(root))
 				PreorderElementTraversal(elements, root.left());
-			if(hasRight(root))
+			if (hasRight(root))
 				PreorderElementTraversal(elements, root.right());
 		}
 	}
@@ -205,16 +236,18 @@ public class BinaryTree<T> implements Iterable<T> {
 	/**
 	 * Perform a preorder traversal over all of the Positions in the list. These elements should be
 	 * added to the PositionList.
+	 *
 	 * @param elements a PositionList<T> that will hold all of the elements in this tree
-	 * @param root The root of the subtree
-	 * 5 marks ***********************************************************************************
+	 * @param root     The root of the subtree
+	 *                 5 marks ***********************************************************************************
 	 */
-	public void PostOrderElementTraversal(PositionList<T> elements, BTPosition<T> root) {
-		if(root != null)
+	public void PostOrderElementTraversal(PositionList<T> elements, BTPosition<T> root)
+	{
+		if (root != null)
 		{
-			if(hasLeft(root))
+			if (hasLeft(root))
 				PostOrderElementTraversal(elements, root.left());
-			if(hasRight(root))
+			if (hasRight(root))
 				PreorderElementTraversal(elements, root.right());
 			elements.addLast(root.element());
 		}
@@ -223,32 +256,37 @@ public class BinaryTree<T> implements Iterable<T> {
 	/**
 	 * Perform an inorder traversal over all of the Positions in the list. These elements should be
 	 * added to the PositionList.
+	 *
 	 * @param elements a PositionList<T> that will hold all of the elements in this tree
-	 * @param root The root of the subtree
-	 * 5 marks ***********************************************************************************
+	 * @param root     The root of the subtree
+	 *                 5 marks ***********************************************************************************
 	 */
-	public void InorderElementTraversal(PositionList<T> elements, BTPosition<T> root) {
-		if(root != null)
+	public void InorderElementTraversal(PositionList<T> elements, BTPosition<T> root)
+	{
+		if (root != null)
 		{
-			if(hasLeft(root))
+			if (hasLeft(root))
 				InorderElementTraversal(elements, root.left());
 			elements.addLast(root.element());
-			if(hasRight(root))
+			if (hasRight(root))
 				InorderElementTraversal(elements, root.right());
 		}
 	}
 
 	/**
 	 * Convert a Position<T> into a TreeNode<T>
+	 *
 	 * @param p a Position<T> to convert
 	 * @return the corresponding TreeNode<T>
 	 */
-	private BTNode<T> checkPosition(BTPosition<T> p) {
-		if (!(p instanceof BTNode<?>)) {
+	private BTNode<T> checkPosition(BTPosition<T> p)
+	{
+		if (!(p instanceof BTNode<?>))
+		{
 			throw new PositionException("Invalid Position");
 		}
 
-		return (BTNode<T>)p;
+		return (BTNode<T>) p;
 	}
 
 	public void setRoot(BTNode<T> root)
@@ -262,10 +300,10 @@ public class BinaryTree<T> implements Iterable<T> {
 		nodeTraversal(nodes, root);
 		Iterator<BTPosition<T>> nodeIt = nodes.iterator();
 		BTNode<T> node = null;
-		while(nodeIt.hasNext())
+		while (nodeIt.hasNext())
 		{
 			node = checkPosition(nodeIt.next());
-			if(node.getKey().getNodeKey().equals(key))
+			if (node.getKey().getNodeKey().equals(key))
 			{
 				return node;
 			}

@@ -5,37 +5,37 @@ package db.models.tree;
  */
 public class EntryKeys
 {
-    private String parentKey;
-    private String leftKey;
-    private String rightKey;
-    private String key;
+	private String parentKey;
+	private String leftKey;
+	private String rightKey;
+	private String key;
 
-    public String getParentKey()
-    {
-        return parentKey;
-    }
+	public EntryKeys(String parentKey, String leftKey, String rightKey, String key)
+	{
 
-    public String getLeftKey()
-    {
-        return leftKey;
-    }
+		this.parentKey = parentKey;
+		this.leftKey = leftKey;
+		this.rightKey = rightKey;
+		this.key = key;
+	}
 
-    public String getRightKey()
-    {
-        return rightKey;
-    }
+	public String getParentKey()
+	{
+		return parentKey;
+	}
 
-    public String getKey()
-    {
-        return key;
-    }
+	public String getLeftKey()
+	{
+		return leftKey;
+	}
 
-    public EntryKeys(String parentKey, String leftKey, String rightKey, String key)
-    {
+	public String getRightKey()
+	{
+		return rightKey;
+	}
 
-        this.parentKey = parentKey;
-        this.leftKey = leftKey;
-        this.rightKey = rightKey;
-        this.key = key;
-    }
+	public String getKey()
+	{
+		return key;
+	}
 }
