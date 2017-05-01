@@ -64,7 +64,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 	 * Get the value for a given key
 	 *
 	 * @param key the key for the item
-	 * @returns the value for the associated key
+	 * @return HashField the value for the associated key
 	 */
 	public synchronized HashField get(K key, String field)
 	{
@@ -91,7 +91,7 @@ public class HashTable<K> implements IMap<K>, Serializable
 	/**
 	 * Get all the fields at the key
 	 * @param key the key you want to get
-	 * @return a list of the fields
+	 * @return PositionList of HashField a list of the fields
 	 */
 	public synchronized PositionList<HashField> getAll(K key)
 	{

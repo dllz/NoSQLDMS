@@ -11,7 +11,6 @@ import java.util.Iterator;
 /**
  * The db.data.structures.position.position List itself, this is just a doubly-linked list that make use of Positions
  *
- * @param <T> the type of the objects in the list.
  */
 public class PositionList<T> implements IList<T>, Serializable
 {
@@ -34,7 +33,7 @@ public class PositionList<T> implements IList<T>, Serializable
 	/**
 	 * Constructor that adds an entry immediately
 	 *
-	 * @param entry
+	 * @param entry the entry to be added
 	 */
 	public PositionList(T entry)
 	{
@@ -47,7 +46,7 @@ public class PositionList<T> implements IList<T>, Serializable
 
 	/**
 	 * Add an element after the given node in the list
-	 * @return Position<T> the element added
+	 * @return Position of T the element added
 	 */
 	public Position<T> addAfter(Position<T> p, T item)
 	{
@@ -64,7 +63,7 @@ public class PositionList<T> implements IList<T>, Serializable
 
 	/**
 	 * Add an element before the given node in a list
-	 * @return Position<T> the element added
+	 * @return Position of T the element added
 	 */
 	public Position<T> addBefore(Position<T> p, T item)
 	{
@@ -81,7 +80,7 @@ public class PositionList<T> implements IList<T>, Serializable
 
 	/**
 	 * Add an element to the start of the list
-	 * @return Position<T> the element added
+	 * @return Position of T the element added
 	 */
 	public Position<T> addFirst(T item)
 	{
@@ -90,7 +89,7 @@ public class PositionList<T> implements IList<T>, Serializable
 
 	/**
 	 * Add an element to the end of the list
-	 * @return Position<T> the element added
+	 * @return Position of T the element added
 	 */
 	public Position<T> addLast(T item)
 	{
@@ -130,7 +129,7 @@ public class PositionList<T> implements IList<T>, Serializable
 	/**
 	 * Return the front of the list
 	 *
-	 * @return the first db.data.structures.position.position<T> in the list
+	 * @return the first db.data.structures.position.position of T in the list
 	 */
 	public Position<T> first()
 	{
@@ -144,7 +143,7 @@ public class PositionList<T> implements IList<T>, Serializable
 	/**
 	 * Returns the last element in the list
 	 *
-	 * @return the last db.data.structures.position.position<T> element in the list
+	 * @return the last db.data.structures.position.position of T element in the list
 	 */
 	public Position<T> last()
 	{
@@ -159,7 +158,7 @@ public class PositionList<T> implements IList<T>, Serializable
 	 * Get the next element in the list
 	 *
 	 * @param p an existing db.data.structures.position.position in the list
-	 * @return the db.data.structures.position.position<T> that corresponds to the next element
+	 * @return the db.data.structures.position.position of T that corresponds to the next element
 	 */
 	public Position<T> next(Position<T> p)
 	{
@@ -173,7 +172,7 @@ public class PositionList<T> implements IList<T>, Serializable
 	 * Get the previous element in the list
 	 *
 	 * @param p an exisiting db.data.structures.position.position in the list
-	 * @return the Posiiton<T> that corresponds to the prev elements
+	 * @return the Posiiton of T that corresponds to the prev elements
 	 */
 	public Position<T> prev(Position<T> p)
 	{
@@ -183,7 +182,8 @@ public class PositionList<T> implements IList<T>, Serializable
 
 	/**
 	 * Returns the node that contains the element that is specified
-	 * @return Position<T> the found node
+	 * @param elem the element your looking for
+	 * @return Position of T the found node
 	 */
 	public Position<T> search(T elem)
 	{
@@ -219,7 +219,7 @@ public class PositionList<T> implements IList<T>, Serializable
 
 	/**
 	 * The tostring
-	 * @return
+	 * @return the to string
 	 */
 	@Override
 	public String toString()
@@ -239,8 +239,8 @@ public class PositionList<T> implements IList<T>, Serializable
 	/**
 	 * Convert a db.data.structures.position.position to a Node
 	 *
-	 * @param position a db.data.structures.position.position<T>
-	 * @return a Node<T> that corresponds to the db.data.structures.position.position<T>
+	 * @param position a db.data.structures.position.position of T
+	 * @return a Node of T that corresponds to the db.data.structures.position.position of T
 	 */
 	private Node<T> checkPosition(Position<T> position)
 	{

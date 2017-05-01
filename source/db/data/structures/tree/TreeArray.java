@@ -171,8 +171,8 @@ public class TreeArray
 
 	/**
 	 * Gets a tree in the array
-	 * @param key
-	 * @return
+	 * @param key you want to get
+	 * @return BinaryTree at the key
 	 */
 	private synchronized BinaryTree getTree(String key)
 	{

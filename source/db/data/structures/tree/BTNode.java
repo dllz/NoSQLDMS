@@ -153,8 +153,8 @@ public class BTNode<T> implements BTPosition<T>
 
 	/**
 	 * Compare to objects
-	 * @param position
-	 * @return
+	 * @param position the position you comparing
+	 * @return boolean
 	 */
 	public boolean equals(BTNode<T> position)
 	{
