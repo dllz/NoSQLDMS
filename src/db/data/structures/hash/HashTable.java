@@ -117,13 +117,23 @@ public class HashTable<K> implements IMap<K>, Serializable
 					while(bucketIterator.hasNext())
 					{
 						posi = bucketIterator.next();
-						if(posi.equal(value))
+						if(posi.getField().equals(value.getField()))
 						{
 							posi.setValue(value.getValue());
-							reverse.addFirst(new EntryStorage<K>(key, value));
+							Iterator<EntryStorage<K>> reverseit = reverse.iterator();
+							while(reverseit.hasNext())
+							{
+								EntryStorage<K> temp = reverseit.next();
+								if(temp.getKey().equals(key) & temp.getField().equals(value.getField()))
+								{
+									temp.setValue(value.getValue());
+									return true;
+								}
+							}
 						}
 					}
 					item.getValue().addFirst(value);
+					reverse.addFirst(new EntryStorage<K>(key, value));
 				}
 			}
 		}
@@ -152,9 +162,9 @@ public class HashTable<K> implements IMap<K>, Serializable
 		return null;
 	}
 
-	public synchronized PositionList<K> search (String field, Object value)
+	public synchronized PositionList<EntryStorage<K>> search (String field, Object value)
 	{
-		PositionList<K> foundList = new PositionList<K>();
+		PositionList<EntryStorage<K>> foundList = new PositionList<>();
 		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<EntryStorage<K>>(reverse);
 		EntryStorage<K> entry;
 		while (reverseI.hasNext())
@@ -162,23 +172,23 @@ public class HashTable<K> implements IMap<K>, Serializable
 			entry = reverseI.next();
 			if(entry.getValue().equals(value) && entry.getField().equals(field))
 			{
-				foundList.addLast(entry.getKey());
+				foundList.addLast(entry);
 			}
 		}
 		return foundList;
 	}
 
-	public synchronized PositionList<K> search (Object value)
+	public synchronized PositionList<EntryStorage<K>> search (Object value)
 	{
-		PositionList<K> foundList = new PositionList<K>();
-		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<EntryStorage<K>>(reverse);
+		PositionList<EntryStorage<K>> foundList = new PositionList<>();
+		PositionListIterator<EntryStorage<K>> reverseI = new PositionListIterator<>(reverse);
 		EntryStorage<K> entry;
 		while (reverseI.hasNext())
 		{
 			entry = reverseI.next();
 			if(entry.getValue().equals(value))
 			{
-				foundList.addLast(entry.getKey());
+				foundList.addLast(entry);
 			}
 		}
 		return foundList;

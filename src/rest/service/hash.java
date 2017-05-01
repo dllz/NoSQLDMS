@@ -2,6 +2,7 @@ package rest.service;
 
 import db.data.structures.hash.HashTable;
 import db.data.structures.position.PositionList;
+import db.models.hash.EntryStorage;
 import db.models.hash.HashField;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -28,7 +29,7 @@ public class hash
     @Path("searchv/{field}/{value}")
     @Produces(MediaType.APPLICATION_JSON)
     public static String searchfv(@PathParam("field") String field, @PathParam("value") String value) {
-        PositionList<String> list = ht.search(field, value);
+        PositionList<EntryStorage<String>> list = ht.search(field, value);
 		ObjectMapper map = new ObjectMapper();
         if(list == null)
         {
@@ -40,8 +41,8 @@ public class hash
 				e.printStackTrace();
 			}
 		}
-        String[] arry = new String[list.size()];
-        Iterator<String> listit = list.iterator();
+		EntryStorage<String>[] arry = new EntryStorage[list.size()];
+        Iterator<EntryStorage<String>> listit = list.iterator();
         int count = 0;
         while(listit.hasNext())
         {
@@ -62,7 +63,7 @@ public class hash
     @Path("searchv/{value}")
     @Produces(MediaType.APPLICATION_JSON)
     public static String searchv(@PathParam("value") String value) {
-        PositionList<String> list = ht.search(value);
+        PositionList<EntryStorage<String>> list = ht.search(value);
 		ObjectMapper map = new ObjectMapper();
         if(list == null)
         {
@@ -74,8 +75,8 @@ public class hash
 				e.printStackTrace();
 			}
 		}
-        String[] arry = new String[list.size()];
-        Iterator<String> listit = list.iterator();
+		EntryStorage<String>[] arry = new EntryStorage[list.size()];
+        Iterator<EntryStorage<String>> listit = list.iterator();
         int count = 0;
         while(listit.hasNext())
         {
