@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * Created by danie on 2017/05/01.
  */
-@Path("enqueue/")
+@Path("queue/")
 public class queue
 {
 	private static Queue q = new Queue();

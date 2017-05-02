@@ -26,7 +26,7 @@ public class tree
 	private static TreeArray trees = new TreeArray();
 
 	@GET
-	@Path("putleft/{treekey}/{rightkey}/{parentkey}/{key}/{value}")
+	@Path("putleft/{treekey}/{parentkey}/{rightkey}/{key}/{value}")
 	@Produces(MediaType.APPLICATION_JSON)
 		public static String putLeft(@PathParam("treekey") String treekey, @PathParam("rightkey") String rightkey, @PathParam("parentkey") String parentkey, @PathParam("value") String value, @PathParam("key") String key)
 	{
@@ -44,7 +44,7 @@ public class tree
 	}
 
 	@GET
-	@Path("putright/{treekey}/{leftkey}/{parentkey}/{key}/{value}")
+	@Path("putright/{treekey}/{parentkey}/{leftkey}/{key}/{value}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String putRight(@PathParam("treekey") String treekey, @PathParam("leftkey") String leftkey, @PathParam("parentkey") String parentkey, @PathParam("value") String value, @PathParam("key") String key)
 	{
@@ -81,7 +81,7 @@ public class tree
 	}
 
 	@GET
-	@Path("search/{key}")
+		@Path("search/{key}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public static String search(@PathParam("key") String key)
 	{
